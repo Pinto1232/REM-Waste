@@ -50,7 +50,11 @@ const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
             <div className='navbar-brand'>
               {logo && (
                 <div className='navbar-logo'>
-                  {typeof logo === 'string' ? <span className='navbar-logo-text'>{logo}</span> : logo}
+                  {typeof logo === 'string' ? (
+                    <span className='navbar-logo-text'>{logo}</span>
+                  ) : (
+                    logo
+                  )}
                 </div>
               )}
             </div>
@@ -82,10 +86,14 @@ const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
                   onClick={handleMobileMenuToggle}
                   aria-label='Toggle mobile menu'
                 >
-                  <span className={`navbar-hamburger ${isMobileMenuOpen ? 'navbar-hamburger-open' : ''}`}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                  <span
+                    className={`navbar-hamburger ${
+                      isMobileMenuOpen ? 'navbar-hamburger-open' : ''
+                    }`}
+                  >
+                    <span />
+                    <span />
+                    <span />
                   </span>
                 </button>
               </div>
@@ -93,11 +101,15 @@ const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
           </div>
 
           {}
-          <div className={`navbar-menu-mobile ${isMobileMenuOpen ? 'navbar-menu-mobile-open' : ''}`}>
+          <div
+            className={`navbar-menu-mobile ${isMobileMenuOpen ? 'navbar-menu-mobile-open' : ''}`}
+          >
             {menuItems.map((item, index) => (
               <button
                 key={item.id ?? index}
-                className={`navbar-menu-item-mobile ${item.active ? 'navbar-menu-item-mobile-active' : ''}`}
+                className={`navbar-menu-item-mobile ${
+                  item.active ? 'navbar-menu-item-mobile-active' : ''
+                }`}
                 onClick={() => handleMenuItemClick(item, index)}
                 disabled={item.disabled}
               >

@@ -96,7 +96,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
           <div className='bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-slate-700/50 p-6 sm:p-8 sticky top-6'>
             <div className='flex items-center mb-6'>
               <div className='w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-3'>
-                <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-5 h-5 text-white'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -117,13 +122,20 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                       <span className='text-slate-800 font-bold text-xs'>SKIP</span>
                     </div>
                     <div>
-                      <h4 className='text-white font-semibold'>{formData.selectedSkip.size} Yard Skip</h4>
-                      <p className='text-slate-400 text-sm'>{formData.selectedSkip.hire_period_days} day hire</p>
+                      <h4 className='text-white font-semibold'>
+                        {formData.selectedSkip.size} Yard Skip
+                      </h4>
+                      <p className='text-slate-400 text-sm'>
+                        {formData.selectedSkip.hire_period_days} day hire
+                      </p>
                     </div>
                   </div>
                   <div className='text-right'>
                     <span className='text-2xl font-bold text-blue-400'>
-                      {formatPrice(formData.selectedSkip.price_before_vat, formData.selectedSkip.vat)}
+                      {formatPrice(
+                        formData.selectedSkip.price_before_vat,
+                        formData.selectedSkip.vat
+                      )}
                     </span>
                   </div>
                 </div>
@@ -132,7 +144,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                 <div className='space-y-3 text-sm'>
                   <div className='flex justify-between items-center py-2 border-b border-slate-700/50'>
                     <span className='text-slate-400 flex items-center'>
-                      <svg className='w-4 h-4 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <svg
+                        className='w-4 h-4 mr-2'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
                         <path
                           strokeLinecap='round'
                           strokeLinejoin='round'
@@ -148,7 +165,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                   {formData.collectionDate && (
                     <div className='flex justify-between items-center py-2 border-b border-slate-700/50'>
                       <span className='text-slate-400 flex items-center'>
-                        <svg className='w-4 h-4 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                        <svg
+                          className='w-4 h-4 mr-2'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
                           <path
                             strokeLinecap='round'
                             strokeLinejoin='round'
@@ -164,7 +186,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
 
                   <div className='flex justify-between items-center py-2 border-b border-slate-700/50'>
                     <span className='text-slate-400 flex items-center'>
-                      <svg className='w-4 h-4 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <svg
+                        className='w-4 h-4 mr-2'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
                         <path
                           strokeLinecap='round'
                           strokeLinejoin='round'
@@ -185,7 +212,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
 
                   <div className='flex justify-between items-center py-2 border-b border-slate-700/50'>
                     <span className='text-slate-400 flex items-center'>
-                      <svg className='w-4 h-4 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <svg
+                        className='w-4 h-4 mr-2'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
                         <path
                           strokeLinecap='round'
                           strokeLinejoin='round'
@@ -204,7 +236,10 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                   <div className='flex justify-between items-center'>
                     <span className='text-lg font-semibold text-white'>Total Amount:</span>
                     <span className='text-2xl font-bold text-blue-300'>
-                      {formatPrice(formData.selectedSkip.price_before_vat, formData.selectedSkip.vat)}
+                      {formatPrice(
+                        formData.selectedSkip.price_before_vat,
+                        formData.selectedSkip.vat
+                      )}
                     </span>
                   </div>
                   <p className='text-xs text-blue-300/70 mt-1'>Including VAT</p>
@@ -220,7 +255,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
           <div className='bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-slate-700/50 p-6 sm:p-8'>
             <div className='flex items-center mb-6'>
               <div className='w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3'>
-                <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-5 h-5 text-white'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -248,7 +288,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                     required
                   />
                   <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                    <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <svg
+                      className='w-5 h-5 text-slate-400'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
                       <path
                         strokeLinecap='round'
                         strokeLinejoin='round'
@@ -261,7 +306,9 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
               </div>
 
               <div>
-                <label className='block text-sm font-medium text-slate-300 mb-2'>Email Address *</label>
+                <label className='block text-sm font-medium text-slate-300 mb-2'>
+                  Email Address *
+                </label>
                 <div className='relative'>
                   <input
                     type='email'
@@ -272,7 +319,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                     required
                   />
                   <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                    <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <svg
+                      className='w-5 h-5 text-slate-400'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
                       <path
                         strokeLinecap='round'
                         strokeLinejoin='round'
@@ -285,7 +337,9 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
               </div>
 
               <div>
-                <label className='block text-sm font-medium text-slate-300 mb-2'>Phone Number</label>
+                <label className='block text-sm font-medium text-slate-300 mb-2'>
+                  Phone Number
+                </label>
                 <div className='relative'>
                   <input
                     type='tel'
@@ -295,7 +349,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                     placeholder='Enter your phone number'
                   />
                   <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                    <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <svg
+                      className='w-5 h-5 text-slate-400'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
                       <path
                         strokeLinecap='round'
                         strokeLinejoin='round'
@@ -318,7 +377,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                     placeholder='Enter your address'
                   />
                   <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                    <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <svg
+                      className='w-5 h-5 text-slate-400'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
                       <path
                         strokeLinecap='round'
                         strokeLinejoin='round'
@@ -342,7 +406,12 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
           <div className='bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-slate-700/50 p-6 sm:p-8'>
             <div className='flex items-center mb-6'>
               <div className='w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mr-3'>
-                <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-5 h-5 text-white'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -384,8 +453,18 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
                     </div>
                     {paymentMethod === method.id && (
                       <div className='w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center'>
-                        <svg className='w-4 h-4 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                        <svg
+                          className='w-4 h-4 text-white'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M5 13l4 4L19 7'
+                          />
                         </svg>
                       </div>
                     )}
@@ -410,7 +489,7 @@ export function PaymentStep({ formData, onUpdate, onComplete, onPrev }: PaymentS
               >
                 Back
               </button>
-              <div className='hidden sm:block w-4'></div>
+              <div className='hidden sm:block w-4' />
               <button
                 onClick={handleComplete}
                 disabled={!isFormValid}

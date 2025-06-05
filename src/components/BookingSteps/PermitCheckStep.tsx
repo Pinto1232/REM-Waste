@@ -10,7 +10,9 @@ interface PermitCheckStepProps {
 }
 
 export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCheckStepProps) {
-  const [permitRequired, setPermitRequired] = useState<boolean | undefined>(formData.permitRequired);
+  const [permitRequired, setPermitRequired] = useState<boolean | undefined>(
+    formData.permitRequired
+  );
   const [permitDetails, setPermitDetails] = useState(formData.permitDetails || '');
 
   useEffect(() => {
@@ -43,7 +45,12 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
       <div className='bg-gradient-to-r from-blue-500/10 via-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-xl p-4 sm:p-6 mb-8 sm:mb-12'>
         <div className='flex items-start'>
           <div className='flex-shrink-0'>
-            <svg className='w-6 h-6 text-blue-400 mt-0.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <svg
+              className='w-6 h-6 text-blue-400 mt-0.5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -55,8 +62,9 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
           <div className='ml-3'>
             <h3 className='text-sm font-medium text-blue-300 mb-1'>Permit Information</h3>
             <p className='text-sm text-slate-300'>
-              A permit is required if the skip will be placed on a public road, pavement, or any council-owned land. If
-              placing on private property (driveway, garden), no permit is needed.
+              A permit is required if the skip will be placed on a public road, pavement, or any
+              council-owned land. If placing on private property (driveway, garden), no permit is
+              needed.
             </p>
           </div>
         </div>
@@ -89,7 +97,12 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
                       : 'bg-gradient-to-r from-slate-600 to-slate-700'
                   }`}
                 >
-                  <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <svg
+                    className='w-6 h-6 text-white'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
@@ -105,8 +118,18 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
               </div>
               {permitRequired === false && (
                 <div className='w-8 h-8 bg-green-500 rounded-full flex items-center justify-center'>
-                  <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                  <svg
+                    className='w-5 h-5 text-white'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M5 13l4 4L19 7'
+                    />
                   </svg>
                 </div>
               )}
@@ -117,26 +140,58 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
           <div className='p-6 sm:p-8'>
             <div className='space-y-3 mb-6'>
               <div className='flex items-center text-slate-300'>
-                <svg className='w-4 h-4 mr-3 text-green-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                <svg
+                  className='w-4 h-4 mr-3 text-green-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M5 13l4 4L19 7'
+                  />
                 </svg>
                 <span className='text-sm'>Driveway placement</span>
               </div>
               <div className='flex items-center text-slate-300'>
-                <svg className='w-4 h-4 mr-3 text-green-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                <svg
+                  className='w-4 h-4 mr-3 text-green-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M5 13l4 4L19 7'
+                  />
                 </svg>
                 <span className='text-sm'>Private garden/yard</span>
               </div>
               <div className='flex items-center text-slate-300'>
-                <svg className='w-4 h-4 mr-3 text-green-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                <svg
+                  className='w-4 h-4 mr-3 text-green-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M5 13l4 4L19 7'
+                  />
                 </svg>
                 <span className='text-sm'>No additional fees</span>
               </div>
             </div>
             <div className='bg-green-500/10 border border-green-500/20 rounded-lg p-3'>
-              <p className='text-green-300 text-sm font-medium'>✓ Fastest option - no waiting for permits</p>
+              <p className='text-green-300 text-sm font-medium'>
+                ✓ Fastest option - no waiting for permits
+              </p>
             </div>
           </div>
         </div>
@@ -166,7 +221,12 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
                       : 'bg-gradient-to-r from-slate-600 to-slate-700'
                   }`}
                 >
-                  <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <svg
+                    className='w-6 h-6 text-white'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
@@ -182,8 +242,18 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
               </div>
               {permitRequired === true && (
                 <div className='w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center'>
-                  <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                  <svg
+                    className='w-5 h-5 text-white'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M5 13l4 4L19 7'
+                    />
                   </svg>
                 </div>
               )}
@@ -194,7 +264,12 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
           <div className='p-6 sm:p-8'>
             <div className='space-y-3 mb-6'>
               <div className='flex items-center text-slate-300'>
-                <svg className='w-4 h-4 mr-3 text-amber-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-4 h-4 mr-3 text-amber-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -205,7 +280,12 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
                 <span className='text-sm'>Road/pavement placement</span>
               </div>
               <div className='flex items-center text-slate-300'>
-                <svg className='w-4 h-4 mr-3 text-amber-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-4 h-4 mr-3 text-amber-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -216,7 +296,12 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
                 <span className='text-sm'>Processing time required</span>
               </div>
               <div className='flex items-center text-slate-300'>
-                <svg className='w-4 h-4 mr-3 text-amber-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-4 h-4 mr-3 text-amber-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -228,7 +313,9 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
               </div>
             </div>
             <div className='bg-amber-500/10 border border-amber-500/20 rounded-lg p-3'>
-              <p className='text-amber-300 text-sm font-medium'>⚠️ Council permit required - additional time & cost</p>
+              <p className='text-amber-300 text-sm font-medium'>
+                ⚠️ Council permit required - additional time & cost
+              </p>
             </div>
           </div>
         </div>
@@ -239,7 +326,12 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
         <div className='bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-slate-700/50 p-6 sm:p-8 mb-8 sm:mb-12'>
           <div className='flex items-center mb-4'>
             <div className='w-10 h-10 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full flex items-center justify-center mr-3'>
-              <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg
+                className='w-5 h-5 text-white'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -279,7 +371,7 @@ export function PermitCheckStep({ formData, onUpdate, onNext, onPrev }: PermitCh
               >
                 Back
               </button>
-              <div className='hidden sm:block w-4'></div>
+              <div className='hidden sm:block w-4' />
               <button
                 onClick={handleContinue}
                 disabled={permitRequired === undefined}

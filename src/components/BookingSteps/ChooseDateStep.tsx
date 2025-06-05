@@ -49,7 +49,12 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
         <div className='bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-slate-700/50 p-6 sm:p-8 hover:border-slate-600 transition-all duration-300'>
           <div className='flex items-center mb-4'>
             <div className='w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-3'>
-              <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg
+                className='w-5 h-5 text-white'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -76,7 +81,12 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
                 className='w-full px-4 py-4 bg-slate-700/50 border border-slate-600 rounded-xl text-white text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:bg-slate-700/70'
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none'>
-                <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-5 h-5 text-slate-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -89,7 +99,9 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
 
             {deliveryDate && (
               <div className='bg-blue-500/10 border border-blue-500/20 rounded-lg p-3'>
-                <p className='text-blue-300 text-sm font-medium'>{formatDateForDisplay(deliveryDate)}</p>
+                <p className='text-blue-300 text-sm font-medium'>
+                  {formatDateForDisplay(deliveryDate)}
+                </p>
               </div>
             )}
           </div>
@@ -99,8 +111,18 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
         <div className='bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-slate-700/50 p-6 sm:p-8 hover:border-slate-600 transition-all duration-300'>
           <div className='flex items-center mb-4'>
             <div className='w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3'>
-              <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 8l6 6 6-6' />
+              <svg
+                className='w-5 h-5 text-white'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M5 8l6 6 6-6'
+                />
               </svg>
             </div>
             <div>
@@ -120,7 +142,12 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
                 className='w-full px-4 py-4 bg-slate-700/50 border border-slate-600 rounded-xl text-white text-lg font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 hover:bg-slate-700/70'
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none'>
-                <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg
+                  className='w-5 h-5 text-slate-400'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -133,12 +160,15 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
 
             {collectionDate ? (
               <div className='bg-green-500/10 border border-green-500/20 rounded-lg p-3'>
-                <p className='text-green-300 text-sm font-medium'>{formatDateForDisplay(collectionDate)}</p>
+                <p className='text-green-300 text-sm font-medium'>
+                  {formatDateForDisplay(collectionDate)}
+                </p>
               </div>
             ) : (
               <div className='bg-slate-700/30 border border-slate-600/50 rounded-lg p-3'>
                 <p className='text-slate-400 text-sm'>
-                  Leave empty to use the standard {formData.selectedSkip?.hire_period_days || 14} day hire period
+                  Leave empty to use the standard {formData.selectedSkip?.hire_period_days || 14}{' '}
+                  day hire period
                 </p>
               </div>
             )}
@@ -150,7 +180,12 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
       {deliveryDate && (
         <div className='bg-gradient-to-r from-slate-800/50 to-slate-700/50 border border-slate-600/50 rounded-xl p-6 mb-8 sm:mb-12'>
           <h4 className='text-lg font-semibold text-white mb-4 flex items-center'>
-            <svg className='w-5 h-5 mr-2 text-blue-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <svg
+              className='w-5 h-5 mr-2 text-blue-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -167,7 +202,9 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
             </div>
             <div className='flex justify-between'>
               <span className='text-slate-400'>Delivery:</span>
-              <span className='text-white font-medium'>{new Date(deliveryDate).toLocaleDateString('en-GB')}</span>
+              <span className='text-white font-medium'>
+                {new Date(deliveryDate).toLocaleDateString('en-GB')}
+              </span>
             </div>
             <div className='flex justify-between'>
               <span className='text-slate-400'>Collection:</span>
@@ -182,7 +219,8 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
               <span className='text-white font-medium'>
                 {collectionDate
                   ? `${Math.ceil(
-                      (new Date(collectionDate).getTime() - new Date(deliveryDate).getTime()) / (1000 * 60 * 60 * 24)
+                      (new Date(collectionDate).getTime() - new Date(deliveryDate).getTime()) /
+                        (1000 * 60 * 60 * 24)
                     )} days`
                   : `${formData.selectedSkip?.hire_period_days || 14} days`}
               </span>
@@ -202,7 +240,7 @@ export function ChooseDateStep({ formData, onUpdate, onNext, onPrev }: ChooseDat
               >
                 Back
               </button>
-              <div className='hidden sm:block w-4'></div>
+              <div className='hidden sm:block w-4' />
               <button
                 onClick={handleContinue}
                 disabled={!deliveryDate}

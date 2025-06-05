@@ -14,15 +14,18 @@ export const skipQueryKeys = {
  * Hook to fetch skips by location using React Query
  */
 export function useSkipsByLocation(
-  params: SkipSearchParams,
+  params: SkipSearchParams | null,
   options?: Omit<UseQueryOptions<Skip[], Error>, 'queryKey' | 'queryFn'>
 ) {
   console.log('useSkipsByLocation - params:', params);
-  console.log('useSkipsByLocation - enabled:', !!params.postcode);
+  console.log('useSkipsByLocation - enabled:', !!params?.postcode);
   
   return useQuery<Skip[], Error>({
-    queryKey: skipQueryKeys.byLocation(params),
+    queryKey: params ? skipQueryKeys.byLocation(params) : ['skips', 'disabled'],
     queryFn: async () => {
+      if (!params) {
+        throw new Error('No search parameters provided');
+      }
       console.log('useSkipsByLocation - queryFn called with params:', params);
       try {
         const result = await skipService.getSkipsByLocation(params);
@@ -33,7 +36,7 @@ export function useSkipsByLocation(
         throw error;
       }
     },
-    enabled: !!params.postcode, // Only run query if postcode is provided
+    enabled: !!params?.postcode, // Only run query if params exist and postcode is provided
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 10 * 60 * 1000, // 10 minutes
     retry: (failureCount: number, error: Error) => {

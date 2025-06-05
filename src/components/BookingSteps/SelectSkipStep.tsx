@@ -42,14 +42,6 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
     area: formData.area,
   };
 
-  const formatPrice = (priceBeforeVat: number, vat: number) => {
-    const totalPrice = priceBeforeVat * (1 + vat / 100);
-    return new Intl.NumberFormat('en-GB', {
-      style: 'currency',
-      currency: 'GBP',
-    }).format(totalPrice);
-  };
-
   const handleFilterChange = (filterType: keyof SearchFilters, value: string) => {
     setSearchFilters(prev => ({
       ...prev,
@@ -84,7 +76,12 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
       <div className='bg-gradient-to-r from-blue-500/10 via-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-xl p-4 sm:p-6 mb-8 sm:mb-12'>
         <div className='flex items-start'>
           <div className='flex-shrink-0'>
-            <svg className='w-6 h-6 text-blue-400 mt-0.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <svg
+              className='w-6 h-6 text-blue-400 mt-0.5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -96,8 +93,8 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
           <div className='ml-3'>
             <h3 className='text-sm font-medium text-blue-300 mb-1'>Skip Selection Guide</h3>
             <p className='text-sm text-slate-300'>
-              Choose from our range of skip sizes based on your project needs. All prices include delivery, collection,
-              and VAT.
+              Choose from our range of skip sizes based on your project needs. All prices include
+              delivery, collection, and VAT.
               {formData.postcode && (
                 <span className='font-medium text-blue-300'> Available in {formData.postcode}</span>
               )}
@@ -111,7 +108,12 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
         <div className='flex items-center justify-between mb-6'>
           <div className='flex items-center'>
             <div className='w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mr-3'>
-              <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg
+                className='w-5 h-5 text-white'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -129,7 +131,9 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
           <button
             onClick={() => setShowFilters(!showFilters)}
             className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
-              showFilters ? 'bg-purple-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              showFilters
+                ? 'bg-purple-600 text-white'
+                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
             }`}
           >
             <svg className='w-4 h-4 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -141,7 +145,7 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
               />
             </svg>
             {showFilters ? 'Hide Filters' : 'Show Filters'}
-            {hasActiveFilters && <span className='ml-2 w-2 h-2 bg-purple-400 rounded-full'></span>}
+            {hasActiveFilters && <span className='ml-2 w-2 h-2 bg-purple-400 rounded-full' />}
           </button>
         </div>
 
@@ -156,7 +160,12 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
               className='w-full px-4 py-3 pl-12 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300'
             />
             <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-              <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg
+                className='w-5 h-5 text-slate-400'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -171,7 +180,12 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
                 className='absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-white transition-colors'
               >
                 <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
                 </svg>
               </button>
             )}
@@ -214,7 +228,9 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
 
             {}
             <div>
-              <label className='block text-sm font-medium text-slate-300 mb-2'>Road Placement</label>
+              <label className='block text-sm font-medium text-slate-300 mb-2'>
+                Road Placement
+              </label>
               <select
                 value={searchFilters.roadLegal}
                 onChange={e => handleFilterChange('roadLegal', e.target.value)}
@@ -268,7 +284,12 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
       <div className='bg-gradient-to-br from-slate-800/50 to-slate-700/50 border border-slate-600/50 rounded-xl p-6 mb-8 sm:mb-12'>
         <div className='flex items-center mb-4'>
           <div className='w-10 h-10 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full flex items-center justify-center mr-3'>
-            <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <svg
+              className='w-5 h-5 text-white'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -360,7 +381,7 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
                 >
                   Back
                 </button>
-                <div className='hidden sm:block w-4'></div>
+                <div className='hidden sm:block w-4' />
                 <button
                   onClick={handleContinue}
                   className='w-full sm:w-36 h-12 bg-blue-600 text-white py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors text-sm sm:text-base'

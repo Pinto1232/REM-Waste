@@ -16,8 +16,17 @@ import {
 } from '../BookingSteps';
 
 export function MultiStepForm() {
-  const { formData, currentStep, currentStepIndex, stepConfigs, updateFormData, nextStep, prevStep, goToStep, reset } =
-    useBookingForm();
+  const {
+    formData,
+    currentStep,
+    currentStepIndex,
+    stepConfigs,
+    updateFormData,
+    nextStep,
+    prevStep,
+    goToStep,
+    reset,
+  } = useBookingForm();
 
   const { addItem, toggleCart, getTotalItems } = useCart();
   const { showSnackbar } = useSnackbar();
@@ -50,20 +59,53 @@ export function MultiStepForm() {
         return <PostcodeStep formData={formData} onUpdate={updateFormData} onNext={nextStep} />;
 
       case 'waste-type':
-        return <WasteTypeStep formData={formData} onUpdate={updateFormData} onNext={nextStep} onPrev={prevStep} />;
+        return (
+          <WasteTypeStep
+            formData={formData}
+            onUpdate={updateFormData}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        );
 
       case 'select-skip':
-        return <SelectSkipStep formData={formData} onUpdate={updateFormData} onNext={nextStep} onPrev={prevStep} />;
+        return (
+          <SelectSkipStep
+            formData={formData}
+            onUpdate={updateFormData}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        );
 
       case 'permit-check':
-        return <PermitCheckStep formData={formData} onUpdate={updateFormData} onNext={nextStep} onPrev={prevStep} />;
+        return (
+          <PermitCheckStep
+            formData={formData}
+            onUpdate={updateFormData}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        );
 
       case 'choose-date':
-        return <ChooseDateStep formData={formData} onUpdate={updateFormData} onNext={nextStep} onPrev={prevStep} />;
+        return (
+          <ChooseDateStep
+            formData={formData}
+            onUpdate={updateFormData}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        );
 
       case 'payment':
         return (
-          <PaymentStep formData={formData} onUpdate={updateFormData} onComplete={handleComplete} onPrev={prevStep} />
+          <PaymentStep
+            formData={formData}
+            onUpdate={updateFormData}
+            onComplete={handleComplete}
+            onPrev={prevStep}
+          />
         );
 
       default:
