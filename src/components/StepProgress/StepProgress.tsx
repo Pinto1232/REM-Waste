@@ -41,7 +41,11 @@ export function StepProgress({ steps, onStepClick }: StepProgressProps) {
               <div className='ml-3'>
                 <p
                   className={`text-sm font-medium ${
-                    step.isActive ? 'text-blue-400' : step.isCompleted ? 'text-green-400' : 'text-gray-400'
+                    step.isActive
+                      ? 'text-blue-400'
+                      : step.isCompleted
+                      ? 'text-green-400'
+                      : 'text-gray-400'
                   }`}
                 >
                   {step.title}
@@ -53,7 +57,9 @@ export function StepProgress({ steps, onStepClick }: StepProgressProps) {
                 <div className='flex-1 mx-6'>
                   <div
                     className={`h-0.5 ${
-                      steps[index + 1].isCompleted || steps[index + 1].isActive ? 'bg-blue-600' : 'bg-gray-600'
+                      steps[index + 1].isCompleted || steps[index + 1].isActive
+                        ? 'bg-blue-600'
+                        : 'bg-gray-600'
                     }`}
                   />
                 </div>
@@ -89,7 +95,7 @@ export function StepProgress({ steps, onStepClick }: StepProgressProps) {
                     <span className='text-xs font-medium'>{index + 1}</span>
                   )}
                 </div>
-                {index < steps.length - 1 && <div className='w-4 h-0.5 bg-gray-600 mx-1'></div>}
+                {index < steps.length - 1 && <div className='w-4 h-0.5 bg-gray-600 mx-1' />}
               </div>
             ))}
           </div>

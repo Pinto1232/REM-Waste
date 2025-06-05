@@ -68,7 +68,9 @@ export function Snackbar({
   };
 
   const positionStyles =
-    position === 'top' ? 'top-4 left-1/2 transform -translate-x-1/2' : 'bottom-4 left-1/2 transform -translate-x-1/2';
+    position === 'top'
+      ? 'top-4 left-1/2 transform -translate-x-1/2'
+      : 'bottom-4 left-1/2 transform -translate-x-1/2';
 
   const animationStyles =
     isVisible && isAnimating
@@ -89,7 +91,10 @@ export function Snackbar({
         <div className='flex-1'>
           <p className='text-sm font-medium'>{message}</p>
         </div>
-        <button onClick={onClose} className='flex-shrink-0 p-1 rounded-full hover:bg-white/20 transition-colors'>
+        <button
+          onClick={onClose}
+          className='flex-shrink-0 p-1 rounded-full hover:bg-white/20 transition-colors'
+        >
           <FiX className='w-4 h-4' />
         </button>
       </div>

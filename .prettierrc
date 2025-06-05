@@ -20,7 +20,7 @@
     {
       "files": ["*.tsx", "*.jsx"],
       "options": {
-        "printWidth": 120,
+        "printWidth": 100,
         "jsxBracketSameLine": false,
         "jsxSingleQuote": true
       }
@@ -28,7 +28,7 @@
     {
       "files": ["*.css", "*.scss"],
       "options": {
-        "printWidth": 120,
+        "printWidth": 100,
         "singleQuote": false
       }
     }

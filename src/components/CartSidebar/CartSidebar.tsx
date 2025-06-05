@@ -37,7 +37,7 @@ export function CartSidebar() {
   };
 
   const LoadingSpinner = () => (
-    <div className='inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin'></div>
+    <div className='inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin' />
   );
 
   if (!state.isOpen) return null;
@@ -45,7 +45,10 @@ export function CartSidebar() {
   return (
     <>
       {}
-      <div className='fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity' onClick={closeCart} />
+      <div
+        className='fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity'
+        onClick={closeCart}
+      />
 
       {}
       <div className='fixed right-0 top-0 h-full w-full max-w-md bg-slate-800 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out'>
@@ -79,7 +82,10 @@ export function CartSidebar() {
             ) : (
               <div className='p-6 space-y-4'>
                 {state.items.map(item => (
-                  <div key={item.id} className='bg-slate-700/50 rounded-xl p-4 border border-slate-600/50'>
+                  <div
+                    key={item.id}
+                    className='bg-slate-700/50 rounded-xl p-4 border border-slate-600/50'
+                  >
                     {}
                     <div className='flex items-start justify-between mb-3'>
                       <div className='flex items-center'>
@@ -92,7 +98,9 @@ export function CartSidebar() {
                         </div>
                       </div>
                       <div className='flex items-center space-x-2'>
-                        <span className='text-lg font-bold text-blue-400'>{formatPrice(item.price, item.vat)}</span>
+                        <span className='text-lg font-bold text-blue-400'>
+                          {formatPrice(item.price, item.vat)}
+                        </span>
                         <button
                           onClick={() => {
                             removeItem(item.id);

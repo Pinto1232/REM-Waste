@@ -82,7 +82,12 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
       case 'garden':
         return ['Grass cuttings', 'Tree branches', 'Soil & turf', 'Plant waste'];
       case 'mixed':
-        return ['Multiple waste types', 'Renovation debris', 'Clearance projects', 'Various materials'];
+        return [
+          'Multiple waste types',
+          'Renovation debris',
+          'Clearance projects',
+          'Various materials',
+        ];
       default:
         return [];
     }
@@ -160,7 +165,12 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
       <div className='bg-gradient-to-r from-blue-500/10 via-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-xl p-4 sm:p-6 mb-8 sm:mb-12'>
         <div className='flex items-start'>
           <div className='flex-shrink-0'>
-            <svg className='w-6 h-6 text-blue-400 mt-0.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <svg
+              className='w-6 h-6 text-blue-400 mt-0.5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -172,8 +182,8 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
           <div className='ml-3'>
             <h3 className='text-sm font-medium text-blue-300 mb-1'>Waste Type Information</h3>
             <p className='text-sm text-slate-300'>
-              Different waste types may have specific disposal requirements and pricing. Select the category that best
-              matches your waste to ensure proper handling.
+              Different waste types may have specific disposal requirements and pricing. Select the
+              category that best matches your waste to ensure proper handling.
             </p>
           </div>
         </div>
@@ -192,13 +202,17 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
               onClick={() => handleTypeSelect(type.id)}
               className={`group cursor-pointer bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border transition-all duration-300 hover:scale-105 hover:shadow-3xl overflow-hidden ${
                 isSelected
-                  ? `border-${colors.gradient.split('-')[1]}-400 ring-2 ${colors.ring} ${colors.shadow}`
+                  ? `border-${colors.gradient.split('-')[1]}-400 ring-2 ${colors.ring} ${
+                      colors.shadow
+                    }`
                   : 'border-slate-700/50 hover:border-slate-600'
               }`}
             >
               {}
               {isSelected && (
-                <div className={`absolute inset-0 bg-gradient-to-br ${colors.overlay} pointer-events-none`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${colors.overlay} pointer-events-none`}
+                />
               )}
 
               {}
@@ -221,8 +235,18 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-r ${colors.gradient}`}
                     >
-                      <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                      <svg
+                        className='w-5 h-5 text-white'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M5 13l4 4L19 7'
+                        />
                       </svg>
                     </div>
                   )}
@@ -232,18 +256,27 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
               {}
               <div className='p-5 sm:p-6'>
                 <div className='space-y-3 mb-5'>
-                  <h4 className='text-sm font-semibold text-slate-300 mb-3'>Common items include:</h4>
+                  <h4 className='text-sm font-semibold text-slate-300 mb-3'>
+                    Common items include:
+                  </h4>
                   {examples.slice(0, 3).map((example: string, index: number) => (
                     <div key={index} className='flex items-center text-slate-300'>
                       <svg
                         className={`w-4 h-4 mr-3 ${
-                          isSelected ? `text-${colors.gradient.split('-')[1]}-400` : 'text-slate-400'
+                          isSelected
+                            ? `text-${colors.gradient.split('-')[1]}-400`
+                            : 'text-slate-400'
                         }`}
                         fill='none'
                         stroke='currentColor'
                         viewBox='0 0 24 24'
                       >
-                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M5 13l4 4L19 7'
+                        />
                       </svg>
                       <span className='text-sm'>{example}</span>
                     </div>
@@ -268,7 +301,12 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
       {selectedType && (
         <div className='bg-gradient-to-r from-slate-800/50 to-slate-700/50 border border-slate-600/50 rounded-xl p-6 mb-8 sm:mb-12'>
           <h4 className='text-lg font-semibold text-white mb-4 flex items-center'>
-            <svg className='w-5 h-5 mr-2 text-blue-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <svg
+              className='w-5 h-5 mr-2 text-blue-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -287,7 +325,9 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
               {getWasteTypeIcon(selectedType)}
             </div>
             <div>
-              <p className='text-white font-medium'>{WASTE_TYPES.find(type => type.id === selectedType)?.name}</p>
+              <p className='text-white font-medium'>
+                {WASTE_TYPES.find(type => type.id === selectedType)?.name}
+              </p>
               <p className='text-slate-400 text-sm'>
                 {WASTE_TYPES.find(type => type.id === selectedType)?.description}
               </p>
@@ -307,7 +347,7 @@ export function WasteTypeStep({ formData, onUpdate, onNext, onPrev }: WasteTypeS
               >
                 Back
               </button>
-              <div className='hidden sm:block w-4'></div>
+              <div className='hidden sm:block w-4' />
               <button
                 onClick={handleContinue}
                 disabled={!selectedType}
