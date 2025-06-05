@@ -1,0 +1,52 @@
+/* Base styles */
+.error-boundary {
+  @apply w-full h-full;
+}
+
+/* Fallback container */
+.error-boundary-fallback {
+  @apply min-h-screen flex items-center justify-center bg-gray-50;
+}
+
+/* Content container */
+.error-boundary-content {
+  @apply bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4;
+}
+
+/* Title styles */
+.error-boundary-title {
+  @apply text-2xl font-bold text-red-600 mb-4;
+}
+
+/* Error message styles */
+.error-boundary-message {
+  @apply text-gray-600 mb-6;
+}
+
+/* Button styles */
+.error-boundary-button {
+  @apply px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 
+         transition-colors duration-200 focus:outline-none focus:ring-2 
+         focus:ring-blue-500 focus:ring-offset-2;
+}
+
+/* Loading state */
+.error-boundary-loading {
+  @apply opacity-50 pointer-events-none;
+}
+
+/* Animation for error appearance */
+@keyframes errorAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-boundary-fallback {
+  animation: errorAppear 0.3s ease-out;
+}

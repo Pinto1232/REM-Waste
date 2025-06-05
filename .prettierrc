@@ -5,5 +5,32 @@
   "singleQuote": true,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "embeddedLanguageFormatting": "auto",
+  "htmlWhitespaceSensitivity": "css",
+  "insertPragma": false,
+  "jsxSingleQuote": true,
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "requirePragma": false,
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": ["*.tsx", "*.jsx"],
+      "options": {
+        "printWidth": 120,
+        "jsxBracketSameLine": false,
+        "jsxSingleQuote": true
+      }
+    },
+    {
+      "files": ["*.css", "*.scss"],
+      "options": {
+        "printWidth": 120,
+        "singleQuote": false
+      }
+    }
+  ]
 }
