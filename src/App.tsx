@@ -1,12 +1,7 @@
-import { BaseLayout } from './layouts/BaseLayout'
-import { SkipsList } from './components/SkipsList/SkipsList'
+import { MultiStepForm } from './components/MultiStepForm'
 
 function App() {
-  return (
-    <BaseLayout>
-      <SkipsList />
-    </BaseLayout>
-  );
+  return <MultiStepForm />;
 }
 
 export default App

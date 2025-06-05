@@ -17,13 +17,26 @@ export function useSkipsByLocation(
   params: SkipSearchParams,
   options?: Omit<UseQueryOptions<Skip[], Error>, 'queryKey' | 'queryFn'>
 ) {
-  return useQuery({
+  console.log('useSkipsByLocation - params:', params);
+  console.log('useSkipsByLocation - enabled:', !!params.postcode);
+  
+  return useQuery<Skip[], Error>({
     queryKey: skipQueryKeys.byLocation(params),
-    queryFn: () => skipService.getSkipsByLocation(params),
+    queryFn: async () => {
+      console.log('useSkipsByLocation - queryFn called with params:', params);
+      try {
+        const result = await skipService.getSkipsByLocation(params);
+        console.log('useSkipsByLocation - API result:', result);
+        return result;
+      } catch (error) {
+        console.error('useSkipsByLocation - API error:', error);
+        throw error;
+      }
+    },
     enabled: !!params.postcode, // Only run query if postcode is provided
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 10 * 60 * 1000, // 10 minutes
-    retry: (failureCount, error) => {
+    retry: (failureCount: number, error: Error) => {
       // Don't retry on 404 errors (no skips found)
       if (error.message.includes('No skips found')) {
         return false;
@@ -42,7 +55,7 @@ export function useSkipById(
   id: number,
   options?: Omit<UseQueryOptions<Skip, Error>, 'queryKey' | 'queryFn'>
 ) {
-  return useQuery({
+  return useQuery<Skip, Error>({
     queryKey: skipQueryKeys.byId(id),
     queryFn: () => skipService.getSkipById(id),
     enabled: !!id && id > 0,
