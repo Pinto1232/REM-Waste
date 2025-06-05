@@ -8,18 +8,20 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(config => {
-  // You can add auth tokens or other headers here
   return config;
 });
 
 api.interceptors.response.use(
   response => response,
   error => {
-    // Global error handling
     if (error.response?.status === 401) {
-      // Handle unauthorized access
       console.error('Unauthorized access');
     }
-    return Promise.reject(error);
+
+    if (error instanceof Error) {
+      return Promise.reject(error);
+    }
+
+    return Promise.reject(new Error(error?.message ?? 'An unexpected error occurred'));
   }
 );

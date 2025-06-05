@@ -7,13 +7,22 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gc": "bash ./scripts/create-component.sh",
+    "gc:ui": "bash ./scripts/create-component.sh --ui",
+    "remove-comments": "node ./scripts/remove-comments.js",
+    "format-components": "node ./scripts/format-components.js",
+    "format:prettier": "prettier --write \"src/components/**/*.{ts,tsx,js,jsx}\"",
+    "format:eslint": "eslint \"src/components/**/*.{ts,tsx,js,jsx}\" --fix",
+    "format:all": "npm run format-components && npm run format:prettier && npm run format:eslint",
+    "lint:components": "eslint \"src/components/**/*.{ts,tsx,js,jsx}\"",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.19",
     "axios": "^1.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@tanstack/react-query": "^4.29.19"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",
@@ -26,7 +35,7 @@
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
     "postcss": "8.4.24",
