@@ -1,5 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '../components/ui/ErrorBoundary';
+import { CartProvider } from './CartContext';
+import { SnackbarProvider } from './SnackbarContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +21,11 @@ export function AppProvider({ children }: AppProviderProps) {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        {children}
+        <SnackbarProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </SnackbarProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   );

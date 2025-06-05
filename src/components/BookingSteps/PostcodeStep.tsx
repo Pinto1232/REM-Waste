@@ -44,9 +44,9 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
     setIsSubmitting(true);
 
     try {
-      onUpdate({ 
-        postcode: trimmedPostcode, 
-        area: trimmedArea 
+      onUpdate({
+        postcode: trimmedPostcode,
+        area: trimmedArea,
       });
 
       await new Promise(resolve => setTimeout(resolve, 300));
@@ -62,31 +62,36 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
   const handlePostcodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPostcode(value);
-    setError(null); 
+    setError(null);
   };
 
   return (
     <BaseLayout
-      title="Enter Your Postcode"
+      title='Enter Your Postcode'
       subtitle="We'll find available skips in your area"
-      maxWidth="2xl"
-      backgroundColor="gray-900"
-      padding="md"
+      maxWidth='2xl'
+      backgroundColor='gray-900'
+      padding='md'
     >
       {}
       <div className='bg-gradient-to-r from-blue-500/10 via-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-xl p-4 sm:p-6 mb-8 sm:mb-12'>
         <div className='flex items-start'>
           <div className='flex-shrink-0'>
             <svg className='w-6 h-6 text-blue-400 mt-0.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+              />
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 11a3 3 0 11-6 0 3 3 0 016 0z' />
             </svg>
           </div>
           <div className='ml-3'>
             <h3 className='text-sm font-medium text-blue-300 mb-1'>Location Service</h3>
             <p className='text-sm text-slate-300'>
-              Enter your postcode to find available skip sizes and pricing in your area. 
-              We'll show you the best options for waste collection near you.
+              Enter your postcode to find available skip sizes and pricing in your area. We'll show you the best options
+              for waste collection near you.
             </p>
           </div>
         </div>
@@ -97,7 +102,12 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
         <div className='flex items-center mb-6'>
           <div className='w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mr-4'>
             <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+              />
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 11a3 3 0 11-6 0 3 3 0 016 0z' />
             </svg>
           </div>
@@ -114,7 +124,11 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
               <div className='flex items-start'>
                 <div className='flex-shrink-0'>
                   <svg className='w-5 h-5 text-red-400 mt-0.5' fill='currentColor' viewBox='0 0 20 20'>
-                    <path fillRule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z' clipRule='evenodd' />
+                    <path
+                      fillRule='evenodd'
+                      d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
+                      clipRule='evenodd'
+                    />
                   </svg>
                 </div>
                 <div className='ml-3'>
@@ -139,16 +153,31 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
                 required
                 disabled={isSubmitting}
                 className={`w-full px-4 py-4 pl-12 bg-slate-700/50 border rounded-xl text-white text-lg font-medium placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 hover:bg-slate-700/70 ${
-                  error 
-                    ? 'border-red-500 focus:ring-red-500 ring-2 ring-red-500/50' 
+                  error
+                    ? 'border-red-500 focus:ring-red-500 ring-2 ring-red-500/50'
                     : 'border-slate-600 focus:ring-green-500 focus:border-green-500'
                 } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 placeholder='e.g., NR32 1AB'
               />
               <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                <svg className={`w-5 h-5 ${error ? 'text-red-400' : 'text-slate-400'}`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' />
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 11a3 3 0 11-6 0 3 3 0 016 0z' />
+                <svg
+                  className={`w-5 h-5 ${error ? 'text-red-400' : 'text-slate-400'}`}
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+                  />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+                  />
                 </svg>
               </div>
               {postcode && !error && (
@@ -161,7 +190,12 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
             </div>
             <p className='text-xs text-slate-400 mt-2 flex items-center'>
               <svg className='w-4 h-4 mr-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                />
               </svg>
               Enter a valid UK postcode to find available services
             </p>
@@ -177,7 +211,7 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
                 type='text'
                 id='area'
                 value={area}
-                onChange={(e) => setArea(e.target.value)}
+                onChange={e => setArea(e.target.value)}
                 disabled={isSubmitting}
                 className={`w-full px-4 py-4 pl-12 bg-slate-700/50 border border-slate-600 rounded-xl text-white text-lg font-medium placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 hover:bg-slate-700/70 ${
                   isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
@@ -186,13 +220,23 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
               />
               <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
                 <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'
+                  />
                 </svg>
               </div>
             </div>
             <p className='text-xs text-slate-400 mt-2 flex items-center'>
               <svg className='w-4 h-4 mr-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                />
               </svg>
               Help us provide more accurate local information
             </p>
@@ -207,16 +251,37 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
             <span className='relative z-10 flex items-center'>
               {isSubmitting ? (
                 <>
-                  <svg className='animate-spin -ml-1 mr-3 h-5 w-5 text-white' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
-                    <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
-                    <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+                  <svg
+                    className='animate-spin -ml-1 mr-3 h-5 w-5 text-white'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                  >
+                    <circle
+                      className='opacity-25'
+                      cx='12'
+                      cy='12'
+                      r='10'
+                      stroke='currentColor'
+                      strokeWidth='4'
+                    ></circle>
+                    <path
+                      className='opacity-75'
+                      fill='currentColor'
+                      d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                    ></path>
                   </svg>
                   Processing...
                 </>
               ) : (
                 <>
                   Find Available Skips
-                  <svg className='w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <svg
+                    className='w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 8l4 4m0 0l-4 4m4-4H3' />
                   </svg>
                 </>
@@ -243,7 +308,12 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
         <div className='bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center'>
           <div className='w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3'>
             <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+              />
             </svg>
           </div>
           <h4 className='text-sm font-semibold text-white mb-1'>Local Service</h4>
@@ -253,7 +323,12 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
         <div className='bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center'>
           <div className='w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3'>
             <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1' />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1'
+              />
             </svg>
           </div>
           <h4 className='text-sm font-semibold text-white mb-1'>Best Prices</h4>

@@ -77,7 +77,11 @@ const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
 
               {}
               <div className='navbar-mobile-toggle'>
-                <button className='navbar-mobile-button' onClick={handleMobileMenuToggle} aria-label='Toggle mobile menu'>
+                <button
+                  className='navbar-mobile-button'
+                  onClick={handleMobileMenuToggle}
+                  aria-label='Toggle mobile menu'
+                >
                   <span className={`navbar-hamburger ${isMobileMenuOpen ? 'navbar-hamburger-open' : ''}`}>
                     <span></span>
                     <span></span>
