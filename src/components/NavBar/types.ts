@@ -25,8 +25,6 @@ export interface NavBarProps extends HTMLAttributes<HTMLElement> {
 
   variant?: NavBarVariant;
 
-  logo?: ReactNode;
-
   menuItems?: NavBarMenuItem[];
 
   onMenuItemClick?: (item: NavBarMenuItem, index: number) => void;

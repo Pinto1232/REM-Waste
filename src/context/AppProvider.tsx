@@ -8,7 +8,7 @@ const queryClient = new QueryClient({
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 5 * 60 * 1000,
     },
   },
 });
@@ -22,9 +22,7 @@ export function AppProvider({ children }: AppProviderProps) {
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <SnackbarProvider>
-          <CartProvider>
-            {children}
-          </CartProvider>
+          <CartProvider>{children}</CartProvider>
         </SnackbarProvider>
       </QueryClientProvider>
     </ErrorBoundary>

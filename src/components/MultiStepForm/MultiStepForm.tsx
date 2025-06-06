@@ -41,7 +41,7 @@ export function MultiStepForm() {
         stepConfig.isActive ||
         (stepIndex === currentStepIndex + 1 && stepConfigs[currentStepIndex]?.isCompleted))
     ) {
-      goToStep(stepId as any);
+      goToStep(stepConfig.id);
     }
   };
 
@@ -116,7 +116,6 @@ export function MultiStepForm() {
   return (
     <div className='min-h-screen bg-gray-900'>
       <NavBar
-        logo='REM Waste'
         menuItems={[
           { id: 'home', label: 'Home', active: false },
           { id: 'services', label: 'Services', active: false },
