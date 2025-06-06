@@ -2,10 +2,14 @@ import { memo } from 'react';
 import type { Skip } from '../../schemas/skip';
 import { formatPrice } from './utils/formatting.ts';
 import { SkipIcon, CheckIcon, ArrowRightIcon } from './icons.tsx';
+import { GradientButton, StatusIcon } from '../ui';
+import { UI_STYLES } from '../../constants';
 
 interface SkipCardProps {
   skip: Skip;
+
   isSelected: boolean;
+
   onSelect: (skip: Skip) => void;
 }
 
@@ -13,26 +17,36 @@ export const SkipCard = memo(function SkipCard({ skip, isSelected, onSelect }: S
   const handleClick = () => onSelect(skip);
   const formattedPrice = formatPrice(skip.price_before_vat, skip.vat);
 
+  const cardClasses = [
+    'group',
+    'relative',
+    UI_STYLES.GRADIENTS.CARD,
+    UI_STYLES.ROUNDED.DEFAULT,
+    UI_STYLES.SHADOWS.DEFAULT,
+    UI_STYLES.SHADOWS.HOVER,
+    'border',
+    UI_STYLES.TRANSITIONS.DEFAULT,
+    'hover:scale-105',
+    'overflow-hidden',
+    'cursor-pointer',
+    isSelected
+      ? 'border-blue-400 ring-2 ring-blue-400/50 shadow-blue-500/25'
+      : 'border-slate-700/50 hover:border-slate-600',
+  ].join(' ');
+
   return (
-    <div
-      onClick={handleClick}
-      className={`group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg border transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden cursor-pointer ${
-        isSelected
-          ? 'border-blue-400 ring-2 ring-blue-400/50 shadow-blue-500/25'
-          : 'border-slate-700/50 hover:border-slate-600'
-      }`}
-    >
+    <div onClick={handleClick} className={cardClasses}>
       {}
       {isSelected && (
         <div className='absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-blue-600/10 pointer-events-none' />
       )}
 
       {}
-      <div className='relative bg-gradient-to-br from-slate-700 to-slate-600 p-4'>
+      <div className={`relative ${UI_STYLES.GRADIENTS.CARD_HEADER} p-4`}>
         <div className='flex items-center justify-between'>
           <div className='flex items-center'>
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors bg-gradient-to-r ${
+              className={`w-10 h-10 ${UI_STYLES.ROUNDED.FULL} flex items-center justify-center transition-colors bg-gradient-to-r ${
                 isSelected ? 'from-blue-500 to-blue-600' : 'from-amber-500 to-amber-600'
               }`}
             >
@@ -47,7 +61,7 @@ export const SkipCard = memo(function SkipCard({ skip, isSelected, onSelect }: S
           </div>
           {isSelected && (
             <div className='w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center'>
-              <CheckIcon className='w-4 h-4 text-white' />
+              <StatusIcon status='success' size='small' />
             </div>
           )}
         </div>
@@ -91,27 +105,16 @@ export const SkipCard = memo(function SkipCard({ skip, isSelected, onSelect }: S
         </div>
 
         {}
-        <button
-          className={`w-full py-2.5 px-3 rounded-lg font-medium transition-all duration-300 text-sm relative overflow-hidden group/btn ${
-            isSelected
-              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
-              : 'bg-gradient-to-r from-slate-700 to-slate-600 text-slate-200 hover:from-slate-600 hover:to-slate-500'
-          }`}
+        <GradientButton
+          variant={isSelected ? 'primary' : 'primary'}
+          size='medium'
+          fullWidth
+          leftIcon={isSelected ? <StatusIcon status='success' size='small' /> : undefined}
+          rightIcon={!isSelected ? <ArrowRightIcon className='w-4 h-4' /> : undefined}
+          className={isSelected ? 'opacity-90' : ''}
         >
-          <span className='relative z-10 flex items-center justify-center'>
-            {isSelected ? (
-              <>
-                <CheckIcon className='w-4 h-4 mr-2' />
-                Selected
-              </>
-            ) : (
-              <>
-                Select Skip
-                <ArrowRightIcon className='w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300' />
-              </>
-            )}
-          </span>
-        </button>
+          {isSelected ? 'Selected' : 'Select Skip'}
+        </GradientButton>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ export function useAsync<T>(asyncFunction: () => Promise<T>, immediate = true) {
 
   useEffect(() => {
     if (immediate) {
-      execute().catch((error) => {
+      execute().catch(error => {
         console.error('useAsync immediate execution error:', error);
       });
     }
