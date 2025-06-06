@@ -39,7 +39,7 @@ export function useSkipsByLocation(
     },
     enabled: !!params?.postcode && params.postcode.trim().length >= 3,
     staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000, // Renamed from cacheTime in v5
+    gcTime: 10 * 60 * 1000,
     retry: (failureCount: number, error: Error) => {
       if (error.message.includes('Please provide a valid postcode')) {
         return false;

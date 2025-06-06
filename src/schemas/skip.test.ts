@@ -11,6 +11,11 @@ describe('Skip Schema Validation', () => {
         description: 'Perfect for medium projects',
         price_before_vat: 200,
         vat: 20,
+        postcode: 'SW1A 1AA',
+        area: 'London',
+        forbidden: false,
+        allowed_on_road: true,
+        allows_heavy_waste: false,
         hire_period_days: 7,
         dimensions: {
           length: 3.7,
@@ -34,14 +39,23 @@ describe('Skip Schema Validation', () => {
       const minimalSkip = {
         id: 1,
         size: 8,
-        name: '8 Yard Skip',
         price_before_vat: 200,
         vat: 20,
+        postcode: 'SW1A 1AA',
+        area: 'London',
+        forbidden: false,
+        allowed_on_road: true,
+        allows_heavy_waste: false,
         hire_period_days: 7,
       };
 
       const result = SkipSchema.parse(minimalSkip);
-      expect(result).toEqual(minimalSkip);
+      // The schema transforms the data to add a generated name
+      const expectedResult = {
+        ...minimalSkip,
+        name: '8 Yard Skip', // Generated from size
+      };
+      expect(result).toEqual(expectedResult);
     });
 
     it('should reject invalid skip object', () => {

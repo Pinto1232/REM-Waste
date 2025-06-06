@@ -42,7 +42,6 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
     area: formData.area && formData.area.trim() ? formData.area.trim() : undefined,
   };
 
-  // Don't render SkipsList if postcode is not valid
   const isValidPostcode = formData.postcode && formData.postcode.trim().length >= 3;
 
   const handleFilterChange = (filterType: keyof SearchFilters, value: string) => {
