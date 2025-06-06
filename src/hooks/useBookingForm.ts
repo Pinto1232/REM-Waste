@@ -4,14 +4,12 @@ import type { BookingFormData } from '../schemas/booking';
 import type { Skip } from '../schemas/skip';
 import { logger } from '../utils/logger';
 
-/** Initial form data with empty values */
 const INITIAL_FORM_DATA: BookingFormData = {
   postcode: '',
   area: '',
   wasteType: '',
 };
 
-/** Array of booking steps in order */
 const STEPS: BookingStep[] = [
   'postcode',
   'waste-type',
@@ -21,7 +19,6 @@ const STEPS: BookingStep[] = [
   'payment',
 ];
 
-/** Human-readable titles for each step */
 const STEP_TITLES: Record<BookingStep, string> = {
   postcode: 'Postcode',
   'waste-type': 'Waste Type',
@@ -31,48 +28,6 @@ const STEP_TITLES: Record<BookingStep, string> = {
   payment: 'Payment',
 };
 
-/**
- * Custom hook for managing booking form state and navigation
- *
- * Provides comprehensive state management for the multi-step booking process,
- * including form data, step navigation, validation, and completion tracking.
- *
- * @returns {Object} Hook return object containing:
- *   - formData: Current form data
- *   - currentStep: Current step identifier
- *   - currentStepIndex: Current step index (0-based)
- *   - steps: Array of all step identifiers
- *   - stepConfigs: Array of step configurations with completion status
- *   - updateFormData: Function to update form data
- *   - nextStep: Function to advance to next step
- *   - prevStep: Function to go back to previous step
- *   - goToStep: Function to jump to specific step
- *   - canProceedToNext: Function to check if can proceed to next step
- *   - selectSkip: Function to select a skip
- *   - reset: Function to reset form to initial state
- *   - isFirstStep: Boolean indicating if on first step
- *   - isLastStep: Boolean indicating if on last step
- *
- * @example
- * ```tsx
- * const {
- *   formData,
- *   currentStep,
- *   updateFormData,
- *   nextStep,
- *   prevStep,
- *   stepConfigs
- * } = useBookingForm();
- *
- * // Update form data
- * updateFormData({ postcode: 'NR32 1AB' });
- *
- * // Navigate steps
- * if (canProceedToNext()) {
- *   nextStep();
- * }
- * ```
- */
 export function useBookingForm() {
   const [formData, setFormData] = useState<BookingFormData>(INITIAL_FORM_DATA);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -104,10 +59,6 @@ export function useBookingForm() {
     }
   }, [currentStepIndex]);
 
-  /**
-   * Jumps directly to a specific step
-   * @param step - The step identifier to navigate to
-   */
   const goToStep = useCallback((step: BookingStep) => {
     const stepIndex = STEPS.indexOf(step);
     if (stepIndex !== -1) {

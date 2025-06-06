@@ -1,10 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * Script to remove comments from files in the components folder
- * while preserving ESLint comments and directives
- */
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -12,30 +7,20 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Configuration
-const COMPONENTS_DIR = path.join(process.cwd(), 'src', 'components');
+const BASE_DIR = process.cwd(); 
 const FILE_EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx'];
 
-// ESLint comment patterns to preserve
-const ESLINT_PATTERNS = [
-  /\/\*\s*eslint/i,
-  /\/\/\s*eslint/i,
-  /\/\*\s*@ts-/i,
-  /\/\/\s*@ts-/i,
-  /\/\*\s*prettier/i,
-  /\/\/\s*prettier/i,
+// Patterns to preserve ESLint, TypeScript, and Prettier directive comments
+const PRESERVE_PATTERNS = [
+  /eslint/i,
+  /@ts-/i,
+  /prettier/i,
 ];
 
-/**
- * Check if a comment should be preserved (ESLint, TypeScript, Prettier directives)
- */
 function shouldPreserveComment(comment) {
-  return ESLINT_PATTERNS.some(pattern => pattern.test(comment));
+  return PRESERVE_PATTERNS.some(pattern => pattern.test(comment));
 }
 
-/**
- * Remove comments from code while preserving ESLint directives
- */
 function removeComments(code) {
   const lines = code.split('\n');
   const result = [];
@@ -49,7 +34,6 @@ function removeComments(code) {
 
     while (j < line.length) {
       if (inMultiLineComment) {
-        // Look for end of multi-line comment
         if (line.substring(j, j + 2) === '*/') {
           const fullComment = multiLineCommentStart + line.substring(0, j + 2);
           if (shouldPreserveComment(fullComment)) {
@@ -62,21 +46,16 @@ function removeComments(code) {
           j++;
         }
       } else {
-        // Check for start of comments
         if (line.substring(j, j + 2) === '/*') {
-          // Multi-line comment start
           const commentStart = j;
           let commentEnd = line.indexOf('*/', j + 2);
-          
           if (commentEnd !== -1) {
-            // Single-line multi-line comment
             const comment = line.substring(commentStart, commentEnd + 2);
             if (shouldPreserveComment(comment)) {
               processedLine += comment;
             }
             j = commentEnd + 2;
           } else {
-            // Multi-line comment continues
             multiLineCommentStart = line.substring(commentStart);
             inMultiLineComment = true;
             if (shouldPreserveComment(multiLineCommentStart)) {
@@ -85,19 +64,15 @@ function removeComments(code) {
             break;
           }
         } else if (line.substring(j, j + 2) === '//') {
-          // Single-line comment
           const comment = line.substring(j);
           if (shouldPreserveComment(comment)) {
             processedLine += comment;
           }
           break;
         } else if (line[j] === '"' || line[j] === "'" || line[j] === '`') {
-          // Handle strings to avoid removing comments inside them
           const quote = line[j];
           processedLine += quote;
           j++;
-          
-          // Find the end of the string
           while (j < line.length) {
             if (line[j] === quote && line[j - 1] !== '\\') {
               processedLine += quote;
@@ -113,20 +88,14 @@ function removeComments(code) {
         }
       }
     }
-
-    // Only add the line if it's not empty or contains preserved comments
     if (processedLine.trim() !== '' || shouldPreserveComment(processedLine)) {
       result.push(processedLine);
     } else if (processedLine.trim() === '' && result.length > 0 && result[result.length - 1].trim() !== '') {
-      // Preserve single empty lines between code blocks
       result.push('');
     }
   }
-
-  // Clean up multiple consecutive empty lines
   const cleaned = [];
   let emptyLineCount = 0;
-  
   for (const line of result) {
     if (line.trim() === '') {
       emptyLineCount++;
@@ -138,19 +107,13 @@ function removeComments(code) {
       cleaned.push(line);
     }
   }
-
   return cleaned.join('\n');
 }
 
-/**
- * Process a single file
- */
 function processFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const processedContent = removeComments(content);
-    
-    // Only write if content changed
     if (content !== processedContent) {
       fs.writeFileSync(filePath, processedContent, 'utf8');
       console.log(`✅ Processed: ${path.relative(process.cwd(), filePath)}`);
@@ -165,60 +128,44 @@ function processFile(filePath) {
   }
 }
 
-/**
- * Recursively find all component files
- */
-function findComponentFiles(dir) {
+function findFiles(dir) {
   const files = [];
-  
   if (!fs.existsSync(dir)) {
-    console.error(`❌ Components directory not found: ${dir}`);
     return files;
   }
-
   const items = fs.readdirSync(dir);
-  
   for (const item of items) {
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
-    
     if (stat.isDirectory()) {
-      files.push(...findComponentFiles(fullPath));
+      if (item === 'node_modules' || item === '@node_modules') continue; 
+      files.push(...findFiles(fullPath));
     } else if (FILE_EXTENSIONS.includes(path.extname(item))) {
       files.push(fullPath);
     }
   }
-  
   return files;
 }
 
-/**
- * Main function
- */
 function main() {
   console.log('🚀 Starting comment removal process...');
-  console.log(`📁 Components directory: ${COMPONENTS_DIR}`);
+  console.log(`📁 Base directory: ${BASE_DIR}`);
   console.log(`📄 File extensions: ${FILE_EXTENSIONS.join(', ')}`);
-  console.log('🛡️  Preserving ESLint, TypeScript, and Prettier comments\n');
+  console.log('🛡️  Preserving only ESLint, TypeScript, and Prettier directive comments\n');
 
-  const files = findComponentFiles(COMPONENTS_DIR);
-  
+  const files = findFiles(BASE_DIR);
   if (files.length === 0) {
-    console.log('⚠️  No component files found.');
+    console.log('⚠️  No files found.');
     return;
   }
-
   console.log(`📋 Found ${files.length} files to process:\n`);
-  
   let processedCount = 0;
   let changedCount = 0;
-
   for (const file of files) {
     const changed = processFile(file);
     processedCount++;
     if (changed) changedCount++;
   }
-
   console.log(`\n✨ Process completed!`);
   console.log(`📊 Summary:`);
   console.log(`   - Files processed: ${processedCount}`);
@@ -226,7 +173,6 @@ function main() {
   console.log(`   - Files unchanged: ${processedCount - changedCount}`);
 }
 
-// Run the script
 if (import.meta.url === `file://${process.argv[1]}` || import.meta.url.endsWith('remove-comments.js')) {
   main();
 }

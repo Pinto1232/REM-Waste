@@ -50,17 +50,17 @@ describe('Skip Schema Validation', () => {
       };
 
       const result = SkipSchema.parse(minimalSkip);
-      // The schema transforms the data to add a generated name
+
       const expectedResult = {
         ...minimalSkip,
-        name: '8 Yard Skip', // Generated from size
+        name: '8 Yard Skip', 
       };
       expect(result).toEqual(expectedResult);
     });
 
     it('should reject invalid skip object', () => {
       const invalidSkip = {
-        id: 'invalid', // Should be number
+        id: 'invalid', 
         size: 8,
         name: '8 Yard Skip',
         price_before_vat: 200,
@@ -97,7 +97,7 @@ describe('Skip Schema Validation', () => {
 
     it('should reject postcode that is too short', () => {
       const invalidParams = {
-        postcode: 'SW', // Too short
+        postcode: 'SW', 
       };
 
       expect(() => SkipSearchParamsSchema.parse(invalidParams)).toThrow();

@@ -1,6 +1,3 @@
-/**
- * Common UI styling constants to reduce duplication
- */
 export const UI_STYLES = {
   GRADIENTS: {
     PRIMARY: 'bg-gradient-to-r from-blue-600 to-blue-700',
@@ -38,9 +35,6 @@ export const UI_STYLES = {
   },
 } as const;
 
-/**
- * Common spacing and sizing constants
- */
 export const UI_SPACING = {
   PADDING: {
     SMALL: 'p-4',
@@ -59,9 +53,6 @@ export const UI_SPACING = {
   },
 } as const;
 
-/**
- * Icon sizes
- */
 export const ICON_SIZES = {
   SMALL: 'w-4 h-4',
   MEDIUM: 'w-5 h-5',

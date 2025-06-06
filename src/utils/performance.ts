@@ -1,6 +1,5 @@
 import { logger } from './logger';
 
-// Web Vitals monitoring
 export interface WebVitalsMetric {
   name: string;
   value: number;
@@ -30,19 +29,14 @@ export class PerformanceMonitor {
       return;
     }
 
-    // Largest Contentful Paint (LCP)
     this.observeLCP();
-    
-    // First Input Delay (FID)
+
     this.observeFID();
-    
-    // Cumulative Layout Shift (CLS)
+
     this.observeCLS();
-    
-    // First Contentful Paint (FCP)
+
     this.observeFCP();
-    
-    // Time to First Byte (TTFB)
+
     this.observeTTFB();
   }
 
@@ -51,13 +45,13 @@ export class PerformanceMonitor {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1] as PerformanceEntry & { renderTime?: number; loadTime?: number };
-        
+
         if (lastEntry) {
           const value = lastEntry.renderTime || lastEntry.loadTime || 0;
           this.recordMetric('LCP', value, this.getLCPRating(value));
         }
       });
-      
+
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
       this.observers.push(observer);
     } catch (error) {
@@ -77,7 +71,7 @@ export class PerformanceMonitor {
           }
         });
       });
-      
+
       observer.observe({ entryTypes: ['first-input'] });
       this.observers.push(observer);
     } catch (error) {
@@ -88,7 +82,7 @@ export class PerformanceMonitor {
   private observeCLS(): void {
     try {
       let clsValue = 0;
-      
+
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry) => {
@@ -99,7 +93,7 @@ export class PerformanceMonitor {
           }
         });
       });
-      
+
       observer.observe({ entryTypes: ['layout-shift'] });
       this.observers.push(observer);
     } catch (error) {
@@ -117,7 +111,7 @@ export class PerformanceMonitor {
           }
         });
       });
-      
+
       observer.observe({ entryTypes: ['paint'] });
       this.observers.push(observer);
     } catch (error) {
@@ -137,7 +131,7 @@ export class PerformanceMonitor {
           }
         });
       });
-      
+
       observer.observe({ entryTypes: ['navigation'] });
       this.observers.push(observer);
     } catch (error) {
@@ -148,7 +142,7 @@ export class PerformanceMonitor {
   private recordMetric(name: string, value: number, rating: 'good' | 'needs-improvement' | 'poor'): void {
     const previousMetric = this.metrics.get(name);
     const delta = previousMetric ? value - previousMetric.value : value;
-    
+
     const metric: WebVitalsMetric = {
       name,
       value,
@@ -156,16 +150,15 @@ export class PerformanceMonitor {
       delta,
       id: this.generateId(),
     };
-    
+
     this.metrics.set(name, metric);
-    
+
     logger.info(`Performance metric recorded: ${name}`, {
       value: Math.round(value),
       rating,
       delta: Math.round(delta),
     });
-    
-    // Report to analytics if enabled
+
     if (import.meta.env.VITE_ENABLE_ANALYTICS === 'true') {
       this.reportToAnalytics(metric);
     }
@@ -206,7 +199,7 @@ export class PerformanceMonitor {
   }
 
   private reportToAnalytics(metric: WebVitalsMetric): void {
-    // This would integrate with your analytics service
+
     logger.debug('Reporting metric to analytics', metric);
   }
 
@@ -224,23 +217,22 @@ export class PerformanceMonitor {
   }
 }
 
-// Bundle size monitoring
 export const bundleAnalyzer = {
   logBundleSize: () => {
     if (typeof window !== 'undefined' && 'performance' in window) {
       const entries = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
-      
+
       const jsFiles = entries.filter(entry => 
         entry.name.includes('.js') && !entry.name.includes('node_modules')
       );
-      
+
       const cssFiles = entries.filter(entry => 
         entry.name.includes('.css') && !entry.name.includes('node_modules')
       );
-      
+
       const totalJSSize = jsFiles.reduce((total, entry) => total + (entry.transferSize || 0), 0);
       const totalCSSSize = cssFiles.reduce((total, entry) => total + (entry.transferSize || 0), 0);
-      
+
       logger.info('Bundle size analysis', {
         jsFiles: jsFiles.length,
         cssFiles: cssFiles.length,
@@ -252,12 +244,11 @@ export const bundleAnalyzer = {
   },
 };
 
-// Memory usage monitoring
 export const memoryMonitor = {
   logMemoryUsage: () => {
     if (typeof window !== 'undefined' && 'performance' in window && 'memory' in performance) {
       const memory = (performance as any).memory;
-      
+
       logger.info('Memory usage', {
         usedJSHeapSize: `${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)} MB`,
         totalJSHeapSize: `${(memory.totalJSHeapSize / 1024 / 1024).toFixed(2)} MB`,
@@ -265,7 +256,7 @@ export const memoryMonitor = {
       });
     }
   },
-  
+
   startMonitoring: (intervalMs: number = 30000) => {
     return setInterval(() => {
       memoryMonitor.logMemoryUsage();
@@ -273,11 +264,9 @@ export const memoryMonitor = {
   },
 };
 
-// Initialize performance monitoring
 export const initializePerformanceMonitoring = (): PerformanceMonitor => {
   const monitor = PerformanceMonitor.getInstance();
-  
-  // Log bundle size on load
+
   if (typeof window !== 'undefined') {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -286,6 +275,6 @@ export const initializePerformanceMonitoring = (): PerformanceMonitor => {
       }, 1000);
     });
   }
-  
+
   return monitor;
 };

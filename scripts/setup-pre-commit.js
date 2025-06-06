@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * Setup pre-commit hooks for automatic code formatting
- */
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -61,30 +57,26 @@ exit 0
 
 function setupPreCommitHook() {
   try {
-    // Check if .git directory exists
+
     if (!fs.existsSync(path.join(process.cwd(), '.git'))) {
       console.error('❌ Not a git repository. Please run this script in a git repository.');
       process.exit(1);
     }
 
-    // Create hooks directory if it doesn't exist
     if (!fs.existsSync(GIT_HOOKS_DIR)) {
       fs.mkdirSync(GIT_HOOKS_DIR, { recursive: true });
       console.log('📁 Created .git/hooks directory');
     }
 
-    // Check if pre-commit hook already exists
     if (fs.existsSync(PRE_COMMIT_HOOK)) {
       const backup = `${PRE_COMMIT_HOOK}.backup.${Date.now()}`;
       fs.renameSync(PRE_COMMIT_HOOK, backup);
       console.log(`📋 Backed up existing pre-commit hook to: ${path.basename(backup)}`);
     }
 
-    // Write the pre-commit hook
     fs.writeFileSync(PRE_COMMIT_HOOK, PRE_COMMIT_SCRIPT, { mode: 0o755 });
     console.log('✅ Pre-commit hook installed successfully!');
 
-    // Make it executable (Unix systems)
     if (process.platform !== 'win32') {
       fs.chmodSync(PRE_COMMIT_HOOK, 0o755);
       console.log('🔧 Made pre-commit hook executable');
@@ -121,13 +113,12 @@ function removePreCommitHook() {
 function showStatus() {
   const exists = fs.existsSync(PRE_COMMIT_HOOK);
   console.log(`Pre-commit hook status: ${exists ? '✅ Installed' : '❌ Not installed'}`);
-  
+
   if (exists) {
     const stats = fs.statSync(PRE_COMMIT_HOOK);
     console.log(`Last modified: ${stats.mtime.toISOString()}`);
     console.log(`File size: ${stats.size} bytes`);
-    
-    // Check if executable (Unix systems)
+
     if (process.platform !== 'win32') {
       const mode = stats.mode & parseInt('777', 8);
       const isExecutable = (mode & parseInt('111', 8)) !== 0;
@@ -136,7 +127,6 @@ function showStatus() {
   }
 }
 
-// Command line interface
 const command = process.argv[2];
 
 switch (command) {

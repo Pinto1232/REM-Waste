@@ -31,7 +31,7 @@ describe('useAsync', () => {
       try {
         await result.current.execute();
       } catch (error) {
-        // Expected to throw
+
       }
     });
 
@@ -48,7 +48,7 @@ describe('useAsync', () => {
     const { result } = renderHook(() => useAsync<string>(mockAsyncFn, false));
 
     let executePromise: ReturnType<typeof result.current.execute>;
-    
+
     act(() => {
       executePromise = result.current.execute();
     });

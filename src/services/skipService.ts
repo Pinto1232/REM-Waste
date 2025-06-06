@@ -68,44 +68,38 @@ skipApi.interceptors.response.use(
   }
 );
 
-// Helper function to get possible area variations
 function getAreaVariations(postcode: string): string[] {
   const trimmed = postcode.trim().toUpperCase();
   const variations: string[] = [];
-  
-  // Try the full postcode
+
   variations.push(trimmed);
-  
-  // Try the area code (first part)
+
   const spaceIndex = trimmed.indexOf(' ');
   if (spaceIndex > 0) {
     variations.push(trimmed.substring(0, spaceIndex));
   }
-  
-  // Try just the letters
+
   const lettersMatch = trimmed.match(/^([A-Z]+)/);
   if (lettersMatch && lettersMatch[1]) {
     variations.push(lettersMatch[1]);
   }
-  
-  // Try letters + first digit
+
   const letterDigitMatch = trimmed.match(/^([A-Z]+\d)/);
   if (letterDigitMatch && letterDigitMatch[1]) {
     variations.push(letterDigitMatch[1]);
   }
-  
-  return [...new Set(variations)]; // Remove duplicates
+
+  return [...new Set(variations)]; 
 }
 
 export const skipService = {
   getSkipsByLocation: async (params: SkipSearchParams): Promise<Skip[]> => {
-    // Validate input parameters
+
     const validatedParams = SkipSearchParamsSchema.parse(params);
 
     const postcode = validatedParams.postcode.trim();
     const providedArea = validatedParams.area?.trim();
-    
-    // If area is provided, use it directly
+
     if (providedArea) {
       const searchParams = new URLSearchParams();
       searchParams.append('postcode', postcode);
@@ -128,7 +122,6 @@ export const skipService = {
       return validatedData;
     }
 
-    // If no area provided, try different area variations
     const areaVariations = getAreaVariations(postcode);
     let lastError: Error | null = null;
 
@@ -164,15 +157,13 @@ export const skipService = {
           attempt: areaVariations.indexOf(area) + 1,
           totalAttempts: areaVariations.length
         });
-        
-        // Continue to next variation unless it's the last one
+
         if (areaVariations.indexOf(area) === areaVariations.length - 1) {
           break;
         }
       }
     }
 
-    // If all attempts failed, throw the last error
     logger.error('Skip service API all attempts failed', {
       postcode,
       areaVariations,
@@ -188,10 +179,9 @@ export const skipService = {
     }
 
     const response = await skipApi.get(`/skips/${id}`);
-    
-    // Validate API response
+
     const validatedData = SkipSchema.parse(response.data);
-    
+
     return validatedData;
   },
 };

@@ -58,36 +58,33 @@ export default [
       },
     },
     rules: {
-      // Base JavaScript rules
+
       ...js.configs.recommended.rules,
-      // React hooks rules
+
       ...reactHooks.configs.recommended.rules,
-      
+
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      // Basic TypeScript rules (without type checking)
+
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
-      
-      // React specific rules for consistency
+
       'react/jsx-boolean-value': ['error', 'never'],
       'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
       'react/jsx-fragments': ['error', 'syntax'],
       'react/jsx-no-useless-fragment': 'error',
       'react/jsx-pascal-case': 'error',
       'react/self-closing-comp': 'error',
-      
-      // General code quality
-      'no-console': 'off', // Allow console for debugging
+
+      'no-console': 'off', 
       'no-debugger': 'error',
-      'no-unused-vars': 'off', // Use TypeScript version instead
+      'no-unused-vars': 'off', 
       'prefer-const': 'error',
-      
-      // Line length consistency
+
       'max-len': ['error', { 
         code: 100, 
         tabWidth: 2,
