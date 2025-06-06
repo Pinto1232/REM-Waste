@@ -84,8 +84,7 @@ export function Snackbar({
 
   return (
     <div
-      className={`fixed z-50 transition-all duration-300 ease-in-out ${positionStyles} ${animationStyles}`}
-      style={{ minWidth: '320px', maxWidth: '500px' }}
+      className={`fixed z-50 transition-all duration-300 ease-in-out min-w-80 max-w-125 ${positionStyles} ${animationStyles}`}
     >
       <div className={getStyles()}>
         <div className='flex-shrink-0'>{getIcon()}</div>

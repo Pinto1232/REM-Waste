@@ -10,7 +10,6 @@ export const api = axios.create({
   timeout: 10000,
 });
 
-// Request interceptor
 api.interceptors.request.use(
   config => {
     logger.debug('API Request', {
@@ -26,7 +25,6 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor
 api.interceptors.response.use(
   (response: AxiosResponse) => {
     logger.debug('API Response Success', {

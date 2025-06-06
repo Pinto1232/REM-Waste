@@ -1,6 +1,5 @@
-// Focus management utilities
 export const focusManagement = {
-  // Trap focus within an element
+
   trapFocus: (element: HTMLElement) => {
     const focusableElements = element.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -32,27 +31,23 @@ export const focusManagement = {
     };
   },
 
-  // Restore focus to a previous element
   restoreFocus: (previousElement: HTMLElement | null) => {
     if (previousElement && document.contains(previousElement)) {
       previousElement.focus();
     }
   },
 
-  // Get the currently focused element
   getCurrentFocus: (): HTMLElement | null => {
     return document.activeElement as HTMLElement;
   },
 };
 
-// ARIA utilities
 export const ariaUtils = {
-  // Generate unique IDs for ARIA relationships
+
   generateId: (prefix: string = 'aria'): string => {
     return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
   },
 
-  // Announce to screen readers
   announce: (message: string, priority: 'polite' | 'assertive' = 'polite') => {
     const announcer = document.createElement('div');
     announcer.setAttribute('aria-live', priority);
@@ -67,17 +62,14 @@ export const ariaUtils = {
     }, 1000);
   },
 
-  // Set ARIA expanded state
   setExpanded: (element: HTMLElement, expanded: boolean) => {
     element.setAttribute('aria-expanded', expanded.toString());
   },
 
-  // Set ARIA selected state
   setSelected: (element: HTMLElement, selected: boolean) => {
     element.setAttribute('aria-selected', selected.toString());
   },
 
-  // Set ARIA disabled state
   setDisabled: (element: HTMLElement, disabled: boolean) => {
     element.setAttribute('aria-disabled', disabled.toString());
     if (disabled) {
@@ -88,9 +80,8 @@ export const ariaUtils = {
   },
 };
 
-// Keyboard navigation utilities
 export const keyboardUtils = {
-  // Handle arrow key navigation in lists
+
   handleArrowNavigation: (
     event: KeyboardEvent,
     items: HTMLElement[],
@@ -124,7 +115,6 @@ export const keyboardUtils = {
     items[newIndex]?.focus();
   },
 
-  // Check if an element is focusable
   isFocusable: (element: HTMLElement): boolean => {
     const focusableSelectors = [
       'button:not([disabled])',
@@ -139,19 +129,16 @@ export const keyboardUtils = {
   },
 };
 
-// Screen reader utilities
 export const screenReaderUtils = {
-  // Hide element from screen readers
+
   hideFromScreenReader: (element: HTMLElement) => {
     element.setAttribute('aria-hidden', 'true');
   },
 
-  // Show element to screen readers
   showToScreenReader: (element: HTMLElement) => {
     element.removeAttribute('aria-hidden');
   },
 
-  // Create screen reader only text
   createSROnlyText: (text: string): HTMLSpanElement => {
     const span = document.createElement('span');
     span.className = 'sr-only';
@@ -160,9 +147,8 @@ export const screenReaderUtils = {
   },
 };
 
-// Color contrast utilities
 export const contrastUtils = {
-  // Calculate relative luminance
+
   getRelativeLuminance: (color: string): number => {
     const rgb = contrastUtils.hexToRgb(color);
     if (!rgb) return 0;
@@ -176,7 +162,6 @@ export const contrastUtils = {
     return 0.2126 * (rs ?? 0) + 0.7152 * (gs ?? 0) + 0.0722 * (bs ?? 0);
   },
 
-  // Convert hex to RGB
   hexToRgb: (hex: string): { r: number; g: number; b: number } | null => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
@@ -188,7 +173,6 @@ export const contrastUtils = {
       : null;
   },
 
-  // Calculate contrast ratio
   getContrastRatio: (color1: string, color2: string): number => {
     const l1 = contrastUtils.getRelativeLuminance(color1);
     const l2 = contrastUtils.getRelativeLuminance(color2);
@@ -197,7 +181,6 @@ export const contrastUtils = {
     return (lighter + 0.05) / (darker + 0.05);
   },
 
-  // Check if contrast meets WCAG standards
   meetsWCAGStandards: (
     color1: string,
     color2: string,
@@ -205,11 +188,11 @@ export const contrastUtils = {
     size: 'normal' | 'large' = 'normal'
   ): boolean => {
     const ratio = contrastUtils.getContrastRatio(color1, color2);
-    
+
     if (level === 'AAA') {
       return size === 'large' ? ratio >= 4.5 : ratio >= 7;
     }
-    
+
     return size === 'large' ? ratio >= 3 : ratio >= 4.5;
   },
 };

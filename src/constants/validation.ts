@@ -1,6 +1,3 @@
-/**
- * Validation messages used throughout the application
- */
 export const VALIDATION_MESSAGES = {
   POSTCODE_REQUIRED: 'Please enter a postcode',
   INVALID_POSTCODE: 'Please enter a valid UK postcode (e.g., NR32 1AB)',
@@ -14,18 +11,12 @@ export const VALIDATION_MESSAGES = {
   PAYMENT_METHOD_REQUIRED: 'Please select a payment method',
 } as const;
 
-/**
- * Regular expressions for validation
- */
 export const VALIDATION_PATTERNS = {
   UK_POSTCODE: /^[A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][A-Z]{2}$/i,
   EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   PHONE: /^[\d\s\-+()]{10,}$/,
 } as const;
 
-/**
- * Form field constraints
- */
 export const FIELD_CONSTRAINTS = {
   POSTCODE_MIN_LENGTH: 3,
   NAME_MIN_LENGTH: 1,

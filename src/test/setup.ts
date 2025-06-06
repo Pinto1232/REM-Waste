@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 import { beforeAll, afterEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
 
-// Mock environment variables
 beforeAll(() => {
   Object.defineProperty(import.meta, 'env', {
     value: {
@@ -15,12 +14,10 @@ beforeAll(() => {
   });
 });
 
-// Cleanup after each test
 afterEach(() => {
   cleanup();
 });
 
-// Global test utilities
 interface MockResizeObserver {
   observe(): void;
   unobserve(): void;
@@ -37,7 +34,6 @@ globalWithResizeObserver.ResizeObserver = class ResizeObserver implements MockRe
   disconnect() {}
 };
 
-// Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: (query: string) => ({

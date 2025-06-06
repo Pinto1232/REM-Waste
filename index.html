@@ -1,13 +1,344 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/vite.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>REM Waste</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//app.wewantwaste.co.uk" />
+  
+  <!-- Preconnect to critical origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  
+  <!-- Critical resource hints -->
+  <link rel="preload" href="/vite.png" as="image" type="image/png" />
+  <link rel="preload" href="/src/main.tsx" as="script" crossorigin />
+  
+  <link rel="icon" type="image/png" href="/vite.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="REM Waste - Professional skip hire and waste management services" />
+  <title>REM Waste - Skip Hire & Waste Management</title>
+
+  <!-- Critical CSS inlined for immediate rendering -->
+  <style data-critical="true">
+    /* Critical CSS - Above the fold styles */
+    html {
+      -webkit-text-size-adjust: 100%;
+      font-display: swap;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      background-color: #111827;
+      color: #f9fafb;
+    }
+
+    /* Immediate layout styles to prevent CLS */
+    #root {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Critical layout containers */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* Critical navigation styles */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: #1f2937;
+      border-bottom: 1px solid #374151;
+      z-index: 50;
+      height: 64px;
+    }
+
+    .navbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-logo img {
+      height: 48px;
+      width: 48px;
+      object-fit: contain;
+    }
+
+    /* Critical button styles */
+    .btn-primary {
+      background-color: #3b82f6;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.875rem;
+      min-height: 44px;
+      min-width: 44px;
+      transition: background-color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary:hover {
+      background-color: #2563eb;
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    /* Critical form styles */
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .form-field {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #4b5563;
+      border-radius: 0.5rem;
+      background-color: #374151;
+      color: #f9fafb;
+      font-size: 1rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Critical loading states */
+    .loading-spinner {
+      width: 2rem;
+      height: 2rem;
+      border: 2px solid #374151;
+      border-top: 2px solid #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    .loading-skeleton {
+      background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Critical step progress styles */
+    .step-progress {
+      padding: 1rem 0;
+      background-color: #1f2937;
+      border-bottom: 1px solid #374151;
+    }
+
+    .step-progress-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Critical accessibility styles */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .focus-visible:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    /* Critical responsive styles */
+    @media (max-width: 640px) {
+      .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+      
+      .navbar-container {
+        padding: 0 0.75rem;
+      }
+      
+      .form-container {
+        padding: 1rem 0.75rem;
+      }
+      
+      .navbar-logo img {
+        height: 40px;
+        width: 40px;
+      }
+    }
+
+    /* Critical reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Critical high contrast support */
+    @media (prefers-contrast: high) {
+      .btn-primary {
+        border: 2px solid #ffffff;
+      }
+      
+      .form-input {
+        border: 2px solid #ffffff;
+      }
+    }
+
+    /* Additional responsive utilities for better performance */
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .pt-safe {
+      padding-top: env(safe-area-inset-top);
+    }
+
+    .btn-touch {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 640px) {
+      .mobile-full-width {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .tablet-up-visible {
+        display: block;
+      }
+
+      .mobile-only {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .tablet-up-visible {
+        display: none;
+      }
+
+      .mobile-only {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Initial loading state to prevent layout shift -->
+  <div id="root">
+    <div class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-logo">
+          <img src="/vite.png" alt="REM Waste Logo" />
+        </div>
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+    <div class="step-progress">
+      <div class="step-progress-container">
+        <div class="loading-skeleton" style="height: 40px; border-radius: 0.5rem;"></div>
+      </div>
+    </div>
+    <div class="form-container">
+      <div class="loading-skeleton" style="height: 200px; border-radius: 0.5rem; margin-bottom: 1rem;"></div>
+      <div class="loading-skeleton" style="height: 44px; border-radius: 0.5rem;"></div>
+    </div>
+  </div>
+  
+  <script type="module" src="/src/main.tsx"></script>
+  
+  <!-- Performance monitoring -->
+  <script>
+    // Preload critical images
+    const criticalImages = ['/vite.png'];
+    criticalImages.forEach(src => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+    });
+    
+    // Performance monitoring
+    if ('PerformanceObserver' in window) {
+      // Monitor LCP
+      new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const lastEntry = entries[entries.length - 1];
+        console.log('LCP:', lastEntry.startTime);
+      }).observe({entryTypes: ['largest-contentful-paint']});
+      
+      // Monitor FCP
+      new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+          if (entry.name === 'first-contentful-paint') {
+            console.log('FCP:', entry.startTime);
+          }
+        });
+      }).observe({entryTypes: ['paint']});
+    }
+  </script>
+</body>
+
 </html>

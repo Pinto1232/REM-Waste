@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// Common validation schemas
 export const postcodeSchema = z
   .string()
   .min(3, 'Postcode must be at least 3 characters')
@@ -23,7 +22,6 @@ export const nameSchema = z
     'Name can only contain letters, spaces, hyphens, apostrophes, and periods'
   );
 
-// Validation utilities
 export const validatePostcode = (
   postcode: string
 ): { isValid: boolean; error?: string | undefined } => {
@@ -74,7 +72,6 @@ export const validateName = (name: string): { isValid: boolean; error?: string |
   }
 };
 
-// Sanitization utilities
 export const sanitizeInput = (input: string): string => {
   return input
     .trim()
@@ -94,7 +91,6 @@ export const sanitizePhone = (phone: string): string => {
   return phone.replace(/[^\d\s\-+()]/g, '').trim();
 };
 
-// Rate limiting utility
 export class RateLimiter {
   private attempts: Map<string, number[]> = new Map();
   private readonly maxAttempts: number;
@@ -109,14 +105,12 @@ export class RateLimiter {
     const now = Date.now();
     const attempts = this.attempts.get(key) || [];
 
-    // Remove old attempts outside the window
     const validAttempts = attempts.filter(time => now - time < this.windowMs);
 
     if (validAttempts.length >= this.maxAttempts) {
       return false;
     }
 
-    // Add current attempt
     validAttempts.push(now);
     this.attempts.set(key, validAttempts);
 

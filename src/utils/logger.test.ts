@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { logger } from './logger';
 
-// Mock console methods
 const mockConsole = {
   debug: vi.fn(),
   info: vi.fn(),
