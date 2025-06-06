@@ -1,0 +1,60 @@
+🚀 Starting comment removal process...
+📁 Components directory: C:\Users\pinto\Documents\Development\REM-Waste\src\components
+📄 File extensions: .ts, .tsx, .js, .jsx
+🛡️  Preserving ESLint, TypeScript, and Prettier comments
+
+📋 Found 47 files to process:
+
+⏭️  No changes: src\components\BookingSteps\ChooseDateStep.tsx
+⏭️  No changes: src\components\BookingSteps\index.ts
+⏭️  No changes: src\components\BookingSteps\PaymentStep.tsx
+⏭️  No changes: src\components\BookingSteps\PermitCheckStep.tsx
+⏭️  No changes: src\components\BookingSteps\PostcodeStep.tsx
+⏭️  No changes: src\components\BookingSteps\SelectSkipStep.tsx
+⏭️  No changes: src\components\BookingSteps\WasteTypeStep.tsx
+⏭️  No changes: src\components\CartSidebar\CartFooter.tsx
+⏭️  No changes: src\components\CartSidebar\CartHeader.tsx
+⏭️  No changes: src\components\CartSidebar\CartItem.tsx
+⏭️  No changes: src\components\CartSidebar\CartOverlay.tsx
+⏭️  No changes: src\components\CartSidebar\CartSidebar.tsx
+⏭️  No changes: src\components\CartSidebar\EmptyCart.tsx
+⏭️  No changes: src\components\CartSidebar\index.ts
+⏭️  No changes: src\components\CartSidebar\LoadingSpinner.tsx
+⏭️  No changes: src\components\CartSidebar\utils\formatting.ts
+⏭️  No changes: src\components\MultiStepForm\index.ts
+⏭️  No changes: src\components\MultiStepForm\MultiStepForm.tsx
+⏭️  No changes: src\components\NavBar\index.ts
+⏭️  No changes: src\components\NavBar\NavBar.tsx
+⏭️  No changes: src\components\NavBar\types.ts
+⏭️  No changes: src\components\NavigationData\index.ts
+⏭️  No changes: src\components\NavigationData\NavigationData.tsx
+⏭️  No changes: src\components\NavigationData\types.ts
+⏭️  No changes: src\components\SkipsList\EmptyState\BaseEmptyState.tsx
+⏭️  No changes: src\components\SkipsList\EmptyState\index.ts
+⏭️  No changes: src\components\SkipsList\EmptyState\InvalidSearch.tsx
+⏭️  No changes: src\components\SkipsList\EmptyState\NoFilterResults.tsx
+⏭️  No changes: src\components\SkipsList\EmptyState\NoResults.tsx
+⏭️  No changes: src\components\SkipsList\ErrorState.tsx
+⏭️  No changes: src\components\SkipsList\hooks\useSkipFiltering.ts
+⏭️  No changes: src\components\SkipsList\icons.tsx
+⏭️  No changes: src\components\SkipsList\index.ts
+⏭️  No changes: src\components\SkipsList\LoadingState.tsx
+⏭️  No changes: src\components\SkipsList\SkipCard.tsx
+⏭️  No changes: src\components\SkipsList\SkipsList.tsx
+⏭️  No changes: src\components\SkipsList\types.ts
+⏭️  No changes: src\components\SkipsList\utils\formatting.ts
+⏭️  No changes: src\components\SkipsList\utils\pricing.ts
+⏭️  No changes: src\components\SkipsList\utils\validation.ts
+⏭️  No changes: src\components\StepProgress\index.ts
+⏭️  No changes: src\components\StepProgress\StepProgress.tsx
+⏭️  No changes: src\components\ui\ErrorBoundary\ErrorBoundary.tsx
+⏭️  No changes: src\components\ui\ErrorBoundary\index.ts
+⏭️  No changes: src\components\ui\ErrorBoundary\types.ts
+⏭️  No changes: src\components\ui\Snackbar\index.ts
+⏭️  No changes: src\components\ui\Snackbar\Snackbar.tsx
+
+✨ Process completed!
+📊 Summary:
+   - Files processed: 47
+   - Files modified: 0
+   - Files unchanged: 47

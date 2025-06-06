@@ -1,5 +1,5 @@
 import { memo, forwardRef, useCallback, useState, useEffect } from 'react';
-import type { NavBarProps } from './types';
+import type { NavBarProps, NavBarMenuItem } from './types';
 import './styles.css';
 
 const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
@@ -8,7 +8,6 @@ const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
       children,
       className = '',
       variant = 'default',
-      logo,
       menuItems = [],
       onMenuItemClick,
       showMobileMenu = false,
@@ -20,7 +19,7 @@ const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(showMobileMenu);
 
     const handleMenuItemClick = useCallback(
-      (item: any, index: number) => {
+      (item: NavBarMenuItem, index: number) => {
         if (onMenuItemClick) {
           onMenuItemClick(item, index);
         }
@@ -48,15 +47,9 @@ const NavBarBase = forwardRef<HTMLElement, NavBarProps>(
           <div className='navbar-content'>
             {}
             <div className='navbar-brand'>
-              {logo && (
-                <div className='navbar-logo'>
-                  {typeof logo === 'string' ? (
-                    <span className='navbar-logo-text'>{logo}</span>
-                  ) : (
-                    logo
-                  )}
-                </div>
-              )}
+              <div className='navbar-logo'>
+                <img src='/vite.png' alt='REM Waste Logo' className='navbar-logo-icon' />
+              </div>
             </div>
 
             {}

@@ -3,74 +3,95 @@ import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { skipService } from '../services/skipService';
 import type { Skip, SkipSearchParams } from '../types/skip';
 
-// Query keys for React Query
 export const skipQueryKeys = {
   all: ['skips'] as const,
   byLocation: (params: SkipSearchParams) => ['skips', 'by-location', params] as const,
   byId: (id: number) => ['skips', 'by-id', id] as const,
 };
 
-/**
- * Hook to fetch skips by location using React Query
- */
 export function useSkipsByLocation(
   params: SkipSearchParams | null,
   options?: Omit<UseQueryOptions<Skip[], Error>, 'queryKey' | 'queryFn'>
 ) {
-  console.log('useSkipsByLocation - params:', params);
-  console.log('useSkipsByLocation - enabled:', !!params?.postcode);
-  
-  return useQuery<Skip[], Error>({
-    queryKey: params ? skipQueryKeys.byLocation(params) : ['skips', 'disabled'],
-    queryFn: async () => {
+  if (import.meta.env.DEV) {
+    console.log('useSkipsByLocation - params:', params);
+    console.log('useSkipsByLocation - enabled:', !!params?.postcode);
+  }
+
+  return useQuery<Skip[], Error>(
+    params ? skipQueryKeys.byLocation(params) : ['skips', 'disabled'],
+    async () => {
       if (!params) {
         throw new Error('No search parameters provided');
       }
-      console.log('useSkipsByLocation - queryFn called with params:', params);
+
+      if (import.meta.env.DEV) {
+        console.log('useSkipsByLocation - queryFn called with params:', params);
+      }
+
       try {
         const result = await skipService.getSkipsByLocation(params);
-        console.log('useSkipsByLocation - API result:', result);
+
+        if (import.meta.env.DEV) {
+          console.log('useSkipsByLocation - API result:', result);
+        }
+
         return result;
       } catch (error) {
-        console.error('useSkipsByLocation - API error:', error);
+        if (import.meta.env.DEV) {
+          console.error('useSkipsByLocation - API error:', error);
+        }
         throw error;
       }
     },
-    enabled: !!params?.postcode, // Only run query if params exist and postcode is provided
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    cacheTime: 10 * 60 * 1000, // 10 minutes
+    {
+      enabled: !!params?.postcode && params.postcode.trim().length >= 3,
+      staleTime: 5 * 60 * 1000,
+      cacheTime: 10 * 60 * 1000,
+      retry: (failureCount: number, error: Error) => {
+        if (error.message.includes('Please provide a valid postcode')) {
+          return false;
+        }
+        if (error.message.includes('No skips found')) {
+          return false;
+        }
+        if (error.message.includes('Invalid search parameters')) {
+          return false;
+        }
+        if (
+          error.message.includes('CORS error') ||
+          error.message.includes('Network error - this might be a CORS issue')
+        ) {
+          return false;
+        }
+        return failureCount < 2;
+      },
+      ...options,
+    }
+  );
+}
+
+export function useSkipById(
+  id: number,
+  options?: Omit<UseQueryOptions<Skip, Error>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery<Skip, Error>(skipQueryKeys.byId(id), () => skipService.getSkipById(id), {
+    enabled: !!id && id > 0,
+    staleTime: 10 * 60 * 1000,
+    cacheTime: 15 * 60 * 1000,
     retry: (failureCount: number, error: Error) => {
-      // Don't retry on 404 errors (no skips found)
-      if (error.message.includes('No skips found')) {
+      if (error.message.includes('Invalid skip ID')) {
         return false;
       }
-      // Retry up to 2 times for other errors
+      if (error.message.includes('Skip not found')) {
+        return false;
+      }
       return failureCount < 2;
     },
     ...options,
   });
 }
 
-/**
- * Hook to fetch a single skip by ID
- */
-export function useSkipById(
-  id: number,
-  options?: Omit<UseQueryOptions<Skip, Error>, 'queryKey' | 'queryFn'>
-) {
-  return useQuery<Skip, Error>({
-    queryKey: skipQueryKeys.byId(id),
-    queryFn: () => skipService.getSkipById(id),
-    enabled: !!id && id > 0,
-    staleTime: 10 * 60 * 1000, // 10 minutes
-    cacheTime: 15 * 60 * 1000, // 15 minutes
-    ...options,
-  });
-}
-
-/**
- * Custom hook that provides search functionality with debouncing
- */
 export function useSkipSearch() {
   const [searchParams, setSearchParams] = useState<SkipSearchParams>({
     postcode: '',
@@ -78,7 +99,7 @@ export function useSkipSearch() {
   });
 
   const query = useSkipsByLocation(searchParams, {
-    enabled: searchParams.postcode.length >= 3, // Only search when postcode has at least 3 characters
+    enabled: searchParams.postcode.length >= 3,
   });
 
   const search = useCallback((params: SkipSearchParams) => {
@@ -96,5 +117,3 @@ export function useSkipSearch() {
     searchParams,
   };
 }
-
-

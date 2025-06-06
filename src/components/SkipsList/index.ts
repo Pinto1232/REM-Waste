@@ -1,1 +1,2 @@
-export { SkipsList } from './SkipsList';
+export { SkipsList } from './SkipsList.tsx';
+export type { SkipsListProps } from './types.ts';
