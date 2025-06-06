@@ -1,5 +1,7 @@
 import axios, { AxiosError } from 'axios';
-import type { Skip, SkipSearchParams } from '../types/skip';
+import { SkipListResponseSchema, SkipSchema, SkipSearchParamsSchema } from '../schemas/skip';
+import type { Skip, SkipSearchParams } from '../schemas/skip';
+import { logger } from '../utils/logger';
 
 interface ApiErrorResponse {
   message?: string;
@@ -66,33 +68,118 @@ skipApi.interceptors.response.use(
   }
 );
 
+// Helper function to get possible area variations
+function getAreaVariations(postcode: string): string[] {
+  const trimmed = postcode.trim().toUpperCase();
+  const variations: string[] = [];
+  
+  // Try the full postcode
+  variations.push(trimmed);
+  
+  // Try the area code (first part)
+  const spaceIndex = trimmed.indexOf(' ');
+  if (spaceIndex > 0) {
+    variations.push(trimmed.substring(0, spaceIndex));
+  }
+  
+  // Try just the letters
+  const lettersMatch = trimmed.match(/^([A-Z]+)/);
+  if (lettersMatch && lettersMatch[1]) {
+    variations.push(lettersMatch[1]);
+  }
+  
+  // Try letters + first digit
+  const letterDigitMatch = trimmed.match(/^([A-Z]+\d)/);
+  if (letterDigitMatch && letterDigitMatch[1]) {
+    variations.push(letterDigitMatch[1]);
+  }
+  
+  return [...new Set(variations)]; // Remove duplicates
+}
+
 export const skipService = {
   getSkipsByLocation: async (params: SkipSearchParams): Promise<Skip[]> => {
-    if (!params.postcode || params.postcode.trim().length < 3) {
-      throw new Error('Please provide a valid postcode (minimum 3 characters)');
-    }
+    // Validate input parameters
+    const validatedParams = SkipSearchParamsSchema.parse(params);
 
-    const searchParams = new URLSearchParams();
-    searchParams.append('postcode', params.postcode.trim());
-    searchParams.append('area', params.area?.trim() || '');
+    const postcode = validatedParams.postcode.trim();
+    const providedArea = validatedParams.area?.trim();
+    
+    // If area is provided, use it directly
+    if (providedArea) {
+      const searchParams = new URLSearchParams();
+      searchParams.append('postcode', postcode);
+      searchParams.append('area', providedArea);
 
-    const url = `/skips/by-location?${searchParams.toString()}`;
+      const url = `/skips/by-location?${searchParams.toString()}`;
 
-    if (import.meta.env.DEV) {
-      console.log('API Request URL:', `${API_BASE_URL}${url}`);
-      console.log('Search params:', {
-        postcode: params.postcode.trim(),
-        area: params.area?.trim() || '',
+      logger.debug('Skip service API request', {
+        url: `${API_BASE_URL}${url}`,
+        params: { postcode, area: providedArea }
       });
+
+      const response = await skipApi.get(url);
+      const validatedData = SkipListResponseSchema.parse(response.data);
+
+      logger.debug('Skip service API response', {
+        resultCount: validatedData.length
+      });
+
+      return validatedData;
     }
 
-    const response = await skipApi.get<Skip[]>(url);
+    // If no area provided, try different area variations
+    const areaVariations = getAreaVariations(postcode);
+    let lastError: Error | null = null;
 
-    if (import.meta.env.DEV) {
-      console.log('API Response:', response.data);
+    for (const area of areaVariations) {
+      try {
+        const searchParams = new URLSearchParams();
+        searchParams.append('postcode', postcode);
+        searchParams.append('area', area);
+
+        const url = `/skips/by-location?${searchParams.toString()}`;
+
+        logger.debug('Skip service API request attempt', {
+          url: `${API_BASE_URL}${url}`,
+          params: { postcode, area },
+          attempt: areaVariations.indexOf(area) + 1,
+          totalAttempts: areaVariations.length
+        });
+
+        const response = await skipApi.get(url);
+        const validatedData = SkipListResponseSchema.parse(response.data);
+
+        logger.debug('Skip service API response success', {
+          resultCount: validatedData.length,
+          successfulArea: area
+        });
+
+        return validatedData;
+      } catch (error) {
+        lastError = error as Error;
+        logger.debug('Skip service API attempt failed', {
+          area,
+          error: lastError.message,
+          attempt: areaVariations.indexOf(area) + 1,
+          totalAttempts: areaVariations.length
+        });
+        
+        // Continue to next variation unless it's the last one
+        if (areaVariations.indexOf(area) === areaVariations.length - 1) {
+          break;
+        }
+      }
     }
 
-    return response.data;
+    // If all attempts failed, throw the last error
+    logger.error('Skip service API all attempts failed', {
+      postcode,
+      areaVariations,
+      lastError: lastError?.message
+    });
+
+    throw lastError || new Error('Failed to fetch skips for this location');
   },
 
   getSkipById: async (id: number): Promise<Skip> => {
@@ -100,7 +187,11 @@ export const skipService = {
       throw new Error('Invalid skip ID provided');
     }
 
-    const response = await skipApi.get<Skip>(`/skips/${id}`);
-    return response.data;
+    const response = await skipApi.get(`/skips/${id}`);
+    
+    // Validate API response
+    const validatedData = SkipSchema.parse(response.data);
+    
+    return validatedData;
   },
 };

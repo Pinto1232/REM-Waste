@@ -1,7 +1,7 @@
 /* Tailwind CSS styles for NavBar component */
 /* Base navbar styles */
 .navbar {
-  @apply relative w-full transition-all duration-200 ease-in-out;
+  @apply sticky top-0 w-full transition-all duration-200 ease-in-out z-50;
 }
 
 .navbar-container {

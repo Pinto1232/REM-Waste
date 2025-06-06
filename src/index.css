@@ -2,90 +2,149 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+.focus-visible:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-gray-900 {
+    background-color: #000000;
+  }
+
+  .text-gray-300 {
+    color: #ffffff;
+  }
+
+  .border-gray-700 {
+    border-color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
+
 /* Custom responsive utilities */
 @layer utilities {
+
   /* Safe area padding for mobile devices */
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
-  
+
   .pt-safe {
     padding-top: env(safe-area-inset-top);
   }
-  
+
   /* Responsive text utilities */
   .text-responsive-xs {
     @apply text-xs sm:text-sm;
   }
-  
+
   .text-responsive-sm {
     @apply text-sm sm:text-base;
   }
-  
+
   .text-responsive-base {
     @apply text-base sm:text-lg;
   }
-  
+
   .text-responsive-lg {
     @apply text-lg sm:text-xl;
   }
-  
+
   .text-responsive-xl {
     @apply text-xl sm:text-2xl;
   }
-  
+
   .text-responsive-2xl {
     @apply text-2xl sm:text-3xl;
   }
-  
+
   /* Responsive spacing utilities */
   .p-responsive {
     @apply p-4 sm:p-6;
   }
-  
+
   .px-responsive {
     @apply px-4 sm:px-6;
   }
-  
+
   .py-responsive {
     @apply py-4 sm:py-6;
   }
-  
+
   .m-responsive {
     @apply m-4 sm:m-6;
   }
-  
+
   .mx-responsive {
     @apply mx-4 sm:mx-6;
   }
-  
+
   .my-responsive {
     @apply my-4 sm:my-6;
   }
-  
+
   /* Responsive gap utilities */
   .gap-responsive {
     @apply gap-3 sm:gap-4;
   }
-  
+
   .gap-responsive-lg {
     @apply gap-4 sm:gap-6;
   }
-  
+
   /* Touch-friendly button sizing */
   .btn-touch {
     @apply min-h-[44px] min-w-[44px];
   }
-  
+
   /* Responsive grid utilities */
   .grid-responsive-2 {
     @apply grid-cols-1 sm:grid-cols-2;
   }
-  
+
   .grid-responsive-3 {
     @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
   }
-  
+
   .grid-responsive-4 {
     @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
   }
@@ -97,29 +156,30 @@
     /* Prevent zoom on iOS when focusing inputs */
     -webkit-text-size-adjust: 100%;
   }
-  
+
   body {
     /* Improve text rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+
     /* Prevent horizontal scroll on mobile */
     overflow-x: hidden;
   }
-  
+
   /* Ensure buttons are touch-friendly on mobile */
-  button, 
+  button,
   [role="button"] {
     @apply btn-touch;
   }
-  
+
   /* Improve form input accessibility on mobile */
-  input, 
-  textarea, 
+  input,
+  textarea,
   select {
-    @apply text-base; /* Prevents zoom on iOS */
+    @apply text-base;
+    /* Prevents zoom on iOS */
   }
-  
+
   /* Responsive container max-widths */
   .container-responsive {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -128,33 +188,34 @@
 
 /* Component-specific responsive styles */
 @layer components {
+
   /* Responsive card component */
   .card-responsive {
     @apply bg-white rounded-lg shadow-md p-4 sm:p-6;
   }
-  
+
   /* Responsive form styles */
   .form-responsive {
     @apply space-y-4 sm:space-y-6;
   }
-  
+
   .form-group-responsive {
     @apply space-y-2 sm:space-y-3;
   }
-  
+
   .form-input-responsive {
     @apply w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base;
   }
-  
+
   .form-button-responsive {
     @apply w-full py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-medium;
   }
-  
+
   /* Responsive navigation */
   .nav-responsive {
     @apply flex flex-col sm:flex-row gap-2 sm:gap-4;
   }
-  
+
   /* Responsive modal/dialog */
   .modal-responsive {
     @apply w-full max-w-md sm:max-w-lg lg:max-w-xl mx-4 sm:mx-auto;
@@ -163,6 +224,7 @@
 
 /* Media queries for specific breakpoints */
 @media (max-width: 640px) {
+
   /* Mobile-specific styles */
   .mobile-full-width {
     width: 100vw;
@@ -171,22 +233,24 @@
 }
 
 @media (min-width: 768px) {
+
   /* Tablet and up styles */
   .tablet-up-visible {
     display: block;
   }
-  
+
   .mobile-only {
     display: none;
   }
 }
 
 @media (max-width: 767px) {
+
   /* Mobile only styles */
   .tablet-up-visible {
     display: none;
   }
-  
+
   .mobile-only {
     display: block;
   }
@@ -197,7 +261,7 @@
   .no-print {
     display: none !important;
   }
-  
+
   .print-only {
     display: block !important;
   }

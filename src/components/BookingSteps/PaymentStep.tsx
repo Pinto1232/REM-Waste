@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { BookingFormData } from '../../types/booking';
+import type { BookingFormData } from '../../schemas/booking';
 import { BaseLayout } from '../../layouts';
 
 interface PaymentStepProps {

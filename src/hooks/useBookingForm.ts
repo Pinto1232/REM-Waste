@@ -1,30 +1,31 @@
 import { useState, useCallback } from 'react';
-import type { BookingFormData, BookingStep, StepConfig } from '../types/booking';
-import type { Skip } from '../types/skip';
+import type { BookingStep, StepConfig } from '../types/booking';
+import type { BookingFormData } from '../schemas/booking';
+import type { Skip } from '../schemas/skip';
+import { logger } from '../utils/logger';
 
 const INITIAL_FORM_DATA: BookingFormData = {
   postcode: '',
   area: '',
   wasteType: '',
-  // permitRequired will be undefined initially until user makes a choice
 };
 
 const STEPS: BookingStep[] = [
   'postcode',
-  'waste-type', 
+  'waste-type',
   'select-skip',
   'permit-check',
   'choose-date',
-  'payment'
+  'payment',
 ];
 
 const STEP_TITLES: Record<BookingStep, string> = {
-  'postcode': 'Postcode',
+  postcode: 'Postcode',
   'waste-type': 'Waste Type',
   'select-skip': 'Select Skip',
   'permit-check': 'Permit Check',
   'choose-date': 'Choose Date',
-  'payment': 'Payment'
+  payment: 'Payment',
 };
 
 export function useBookingForm() {
@@ -36,19 +37,19 @@ export function useBookingForm() {
   const updateFormData = useCallback((updates: Partial<BookingFormData>) => {
     setFormData(prev => {
       const newData = { ...prev, ...updates };
-      console.log('Form data updated:', newData);
+      logger.debug('Form data updated', newData);
       return newData;
     });
   }, []);
 
   const nextStep = useCallback(() => {
-    console.log('Next step called. Current step index:', currentStepIndex);
+    logger.debug('Next step called', { currentStepIndex });
     if (currentStepIndex < STEPS.length - 1) {
       const newIndex = currentStepIndex + 1;
-      console.log('Moving to step index:', newIndex, 'Step:', STEPS[newIndex]);
+      logger.debug('Moving to step', { newIndex, step: STEPS[newIndex] });
       setCurrentStepIndex(newIndex);
     } else {
-      console.log('Already at last step');
+      logger.debug('Already at last step');
     }
   }, [currentStepIndex]);
 
@@ -65,24 +66,27 @@ export function useBookingForm() {
     }
   }, []);
 
-  const isStepCompleted = useCallback((step: BookingStep): boolean => {
-    switch (step) {
-      case 'postcode':
-        return !!formData.postcode;
-      case 'waste-type':
-        return !!formData.wasteType;
-      case 'select-skip':
-        return !!formData.selectedSkip;
-      case 'permit-check':
-        return formData.permitRequired !== undefined;
-      case 'choose-date':
-        return !!formData.deliveryDate;
-      case 'payment':
-        return !!formData.paymentMethod;
-      default:
-        return false;
-    }
-  }, [formData]);
+  const isStepCompleted = useCallback(
+    (step: BookingStep): boolean => {
+      switch (step) {
+        case 'postcode':
+          return !!formData.postcode;
+        case 'waste-type':
+          return !!formData.wasteType;
+        case 'select-skip':
+          return !!formData.selectedSkip;
+        case 'permit-check':
+          return formData.permitRequired !== undefined;
+        case 'choose-date':
+          return !!formData.deliveryDate;
+        case 'payment':
+          return !!formData.paymentMethod;
+        default:
+          return false;
+      }
+    },
+    [formData]
+  );
 
   const getStepConfigs = useCallback((): StepConfig[] => {
     return STEPS.map((step, index) => ({
@@ -95,12 +99,15 @@ export function useBookingForm() {
   }, [currentStepIndex, isStepCompleted]);
 
   const canProceedToNext = useCallback((): boolean => {
-    return isStepCompleted(currentStep);
+    return currentStep ? isStepCompleted(currentStep) : false;
   }, [currentStep, isStepCompleted]);
 
-  const selectSkip = useCallback((skip: Skip) => {
-    updateFormData({ selectedSkip: skip });
-  }, [updateFormData]);
+  const selectSkip = useCallback(
+    (skip: Skip) => {
+      updateFormData({ selectedSkip: skip });
+    },
+    [updateFormData]
+  );
 
   const reset = useCallback(() => {
     setFormData(INITIAL_FORM_DATA);

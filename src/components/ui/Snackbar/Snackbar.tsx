@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiCheck, FiX, FiAlertCircle, FiInfo } from 'react-icons/fi';
 
 export type SnackbarType = 'success' | 'error' | 'warning' | 'info';
@@ -32,10 +32,11 @@ export function Snackbar({
       return () => clearTimeout(timer);
     } else {
       setIsAnimating(false);
+      return undefined;
     }
   }, [isVisible, duration, onClose]);
 
-  const getIcon = () => {
+  const getIcon = (): React.JSX.Element => {
     switch (type) {
       case 'success':
         return <FiCheck className='w-5 h-5' />;
@@ -76,8 +77,8 @@ export function Snackbar({
     isVisible && isAnimating
       ? 'translate-y-0 opacity-100'
       : position === 'top'
-      ? '-translate-y-full opacity-0'
-      : 'translate-y-full opacity-0';
+        ? '-translate-y-full opacity-0'
+        : 'translate-y-full opacity-0';
 
   if (!isVisible && !isAnimating) return null;
 

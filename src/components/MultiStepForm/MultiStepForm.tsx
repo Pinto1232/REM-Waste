@@ -2,10 +2,10 @@ import { useBookingForm } from '../../hooks/useBookingForm';
 import { StepProgress } from '../StepProgress';
 import { NavBar } from '../NavBar';
 import { CartSidebar } from '../CartSidebar';
-import { useCart } from '../../context/CartContext';
-import { useSnackbar } from '../../context/SnackbarContext';
+import { useCart } from '../../hooks/useCart';
+import { useSnackbar } from '../../hooks/useSnackbar';
 import { FiShoppingCart } from 'react-icons/fi';
-import type { BookingFormData } from '../../types/booking';
+import type { BookingFormData } from '../../schemas/booking';
 import {
   PostcodeStep,
   WasteTypeStep,

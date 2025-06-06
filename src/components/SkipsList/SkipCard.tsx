@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import type { Skip } from '../../types/skip';
+import type { Skip } from '../../schemas/skip';
 import { formatPrice } from './utils/formatting.ts';
 import { SkipIcon, CheckIcon, ArrowRightIcon } from './icons.tsx';
 

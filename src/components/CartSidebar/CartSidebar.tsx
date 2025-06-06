@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
-import { useCart } from '../../context/CartContext';
-import { useSnackbar } from '../../context/SnackbarContext';
+import { useCart } from '../../hooks/useCart';
+import { useSnackbar } from '../../hooks/useSnackbar';
 import { CartHeader } from './CartHeader.tsx';
 import { CartItem } from './CartItem.tsx';
 import { CartFooter } from './CartFooter.tsx';
@@ -35,7 +35,7 @@ export function CartSidebar() {
 
       showSnackbar('🎉 Checkout completed successfully!', 'success');
       clearCart();
-    } catch (error) {
+    } catch {
       showSnackbar('Checkout failed. Please try again.', 'error');
     } finally {
       setIsCheckingOut(false);

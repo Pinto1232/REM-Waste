@@ -17,7 +17,7 @@ export interface Skip {
 
 export interface SkipSearchParams {
   postcode: string;
-  area?: string; // Optional in interface but will be defaulted to empty string in service
+  area?: string;
 }
 
 export interface SkipSearchResponse {
