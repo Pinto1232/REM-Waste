@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Skip } from '../../../types/skip';
+import type { Skip } from '../../../schemas/skip';
 import { calculateTotalPrice } from '../utils/pricing.ts';
 
 interface SearchFilters {

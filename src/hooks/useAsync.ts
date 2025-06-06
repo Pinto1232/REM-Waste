@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 interface UseAsyncState<T> {
   data: T | null;
@@ -25,9 +25,13 @@ export function useAsync<T>(asyncFunction: () => Promise<T>, immediate = true) {
     }
   }, [asyncFunction]);
 
-  if (immediate) {
-    execute().catch(console.error);
-  }
+  useEffect(() => {
+    if (immediate) {
+      execute().catch((error) => {
+        console.error('useAsync immediate execution error:', error);
+      });
+    }
+  }, [execute, immediate]);
 
   return { ...state, execute };
 }

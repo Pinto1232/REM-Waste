@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { BookingFormData } from '../../types/booking';
+import type { BookingFormData } from '../../schemas/booking';
 import { BaseLayout } from '../../layouts';
 
 interface PostcodeStepProps {
@@ -52,7 +52,7 @@ export function PostcodeStep({ formData, onUpdate, onNext }: PostcodeStepProps) 
       await new Promise(resolve => setTimeout(resolve, 300));
 
       onNext();
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);

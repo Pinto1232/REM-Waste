@@ -19,8 +19,8 @@ export function StepProgress({ steps, onStepClick }: StepProgressProps) {
                   step.isActive
                     ? 'bg-blue-600 border-blue-600 text-white'
                     : step.isCompleted
-                    ? 'bg-green-600 border-green-600 text-white'
-                    : 'bg-gray-700 border-gray-600 text-gray-400'
+                      ? 'bg-green-600 border-green-600 text-white'
+                      : 'bg-gray-700 border-gray-600 text-gray-400'
                 } ${onStepClick ? 'cursor-pointer hover:opacity-80' : ''}`}
                 onClick={() => onStepClick?.(step.id)}
               >
@@ -44,8 +44,8 @@ export function StepProgress({ steps, onStepClick }: StepProgressProps) {
                     step.isActive
                       ? 'text-blue-400'
                       : step.isCompleted
-                      ? 'text-green-400'
-                      : 'text-gray-400'
+                        ? 'text-green-400'
+                        : 'text-gray-400'
                   }`}
                 >
                   {step.title}
@@ -57,7 +57,7 @@ export function StepProgress({ steps, onStepClick }: StepProgressProps) {
                 <div className='flex-1 mx-6'>
                   <div
                     className={`h-0.5 ${
-                      steps[index + 1].isCompleted || steps[index + 1].isActive
+                      steps[index + 1]?.isCompleted || steps[index + 1]?.isActive
                         ? 'bg-blue-600'
                         : 'bg-gray-600'
                     }`}
@@ -78,8 +78,8 @@ export function StepProgress({ steps, onStepClick }: StepProgressProps) {
                     step.isActive
                       ? 'bg-blue-600 border-blue-600 text-white'
                       : step.isCompleted
-                      ? 'bg-green-600 border-green-600 text-white'
-                      : 'bg-gray-700 border-gray-600 text-gray-400'
+                        ? 'bg-green-600 border-green-600 text-white'
+                        : 'bg-gray-700 border-gray-600 text-gray-400'
                   } ${onStepClick ? 'cursor-pointer hover:opacity-80' : ''}`}
                   onClick={() => onStepClick?.(step.id)}
                 >

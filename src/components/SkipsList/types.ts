@@ -1,4 +1,4 @@
-import type { SkipSearchParams, Skip } from '../../types/skip';
+import type { SkipSearchParams, Skip } from '../../schemas/skip';
 
 export interface SearchFilters {
   sizeRange: string;
@@ -10,6 +10,6 @@ export interface SearchFilters {
 export interface SkipsListProps {
   searchParams: SkipSearchParams;
   onSkipSelect?: (skip: Skip) => void;
-  selectedSkipId?: number;
+  selectedSkipId: number | undefined;
   searchFilters?: SearchFilters;
 }

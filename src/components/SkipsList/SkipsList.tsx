@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 import { useSkipsByLocation } from '../../hooks/useSkips';
-import type { Skip } from '../../types/skip';
+import type { Skip } from '../../schemas/skip';
 import { SkipCard } from './SkipCard.tsx';
 import { EmptyState } from './EmptyState/index.ts';
 import { LoadingState } from './LoadingState.tsx';
@@ -25,7 +25,7 @@ export function SkipsList({
     refetch,
   } = useSkipsByLocation(isValidSearch ? searchParams : null);
 
-  const filteredSkips = useSkipFiltering(skips, searchFilters);
+  const filteredSkips = useSkipFiltering(skips as Skip[] | undefined, searchFilters);
 
   const handleSkipSelect = useCallback(
     (skip: Skip) => {
@@ -47,7 +47,7 @@ export function SkipsList({
     return <ErrorState error={error} onRetry={refetch} />;
   }
 
-  if (!skips?.length) {
+  if (!skips || !Array.isArray(skips) || skips.length === 0) {
     return <EmptyState.NoResults />;
   }
 
@@ -62,11 +62,12 @@ export function SkipsList({
         <p className='text-slate-400 text-sm'>
           {searchFilters && hasActiveFilters(searchFilters) ? (
             <>
-              Showing {filteredSkips.length} of {skips.length} skips
+              Showing {filteredSkips.length} of {Array.isArray(skips) ? skips.length : 0} skips
             </>
           ) : (
             <>
-              {skips.length} skip{skips.length !== 1 ? 's' : ''} available
+              {Array.isArray(skips) ? skips.length : 0} skip
+              {Array.isArray(skips) && skips.length !== 1 ? 's' : ''} available
             </>
           )}
         </p>

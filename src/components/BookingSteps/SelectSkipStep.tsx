@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import type { BookingFormData } from '../../types/booking';
-import type { Skip } from '../../types/skip';
+import type { BookingFormData } from '../../schemas/booking';
+import type { Skip, SkipSearchParams } from '../../schemas/skip';
 import { SkipsList } from '../SkipsList/SkipsList';
 import { BaseLayout } from '../../layouts';
 
@@ -37,10 +37,13 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
     }
   };
 
-  const searchParams = {
-    postcode: formData.postcode,
-    area: formData.area,
+  const searchParams: SkipSearchParams = {
+    postcode: formData.postcode || '',
+    area: formData.area && formData.area.trim() ? formData.area.trim() : undefined,
   };
+
+  // Don't render SkipsList if postcode is not valid
+  const isValidPostcode = formData.postcode && formData.postcode.trim().length >= 3;
 
   const handleFilterChange = (filterType: keyof SearchFilters, value: string) => {
     setSearchFilters(prev => ({
@@ -361,12 +364,48 @@ export function SelectSkipStep({ formData, onUpdate, onNext, onPrev }: SelectSki
 
       {}
       <div className='mb-8 sm:mb-12'>
-        <SkipsList
-          searchParams={searchParams}
-          onSkipSelect={handleSkipSelect}
-          selectedSkipId={formData.selectedSkip?.id}
-          searchFilters={searchFilters}
-        />
+        {isValidPostcode ? (
+          <SkipsList
+            searchParams={searchParams}
+            onSkipSelect={handleSkipSelect}
+            selectedSkipId={formData.selectedSkip?.id}
+            searchFilters={searchFilters}
+          />
+        ) : (
+          <div className='bg-gradient-to-br from-slate-800/50 to-slate-700/50 border border-slate-600/50 rounded-xl p-8 text-center'>
+            <div className='w-16 h-16 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4'>
+              <svg
+                className='w-8 h-8 text-white'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+                />
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+                />
+              </svg>
+            </div>
+            <h3 className='text-xl font-semibold text-white mb-2'>Postcode Required</h3>
+            <p className='text-slate-400 mb-4'>
+              Please enter a valid postcode to view available skips in your area.
+            </p>
+            <button
+              onClick={onPrev}
+              className='bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors'
+            >
+              Go Back to Enter Postcode
+            </button>
+          </div>
+        )}
       </div>
 
       {}
